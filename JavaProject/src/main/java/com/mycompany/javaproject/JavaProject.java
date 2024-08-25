@@ -4,6 +4,7 @@
 
 package com.mycompany.javaproject;
 
+import com.mycompany.model.Conexion;
 import java.sql.Connection;
 import java.sql.SQLException;
 

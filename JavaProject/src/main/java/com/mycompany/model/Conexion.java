@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.javaproject;
+package com.mycompany.model;
 
-import com.mycompany.utilidades.Propiedades;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +17,7 @@ import java.util.Properties;
 public class Conexion {
 
     private static Conexion instancia = null;
-    private Propiedades properties = new Propiedades();
+    private final Propiedades properties = new Propiedades();
 
     private Conexion() {
     }
