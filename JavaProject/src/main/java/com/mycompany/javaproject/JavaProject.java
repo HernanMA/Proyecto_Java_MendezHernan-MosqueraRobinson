@@ -5,6 +5,7 @@
 package com.mycompany.javaproject;
 
 import com.mycompany.model.Conexion;
+import com.mycompany.view.Main;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -26,5 +27,8 @@ public class JavaProject {
         } finally {
             conexionDB.cerrarConexion(conexion);
         }
+        
+        Main main = new Main();
+        main.setVisible(true);
     }
 }
