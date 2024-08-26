@@ -4,17 +4,19 @@
  */
 package com.mycompany.view;
 
+
 /**
  *
  * @author hernan
  */
 public class Main extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        setLocationRelativeTo(null); 
     }
 
     /**
@@ -30,7 +32,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        start = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,8 +46,13 @@ public class Main extends javax.swing.JFrame {
         jTextArea1.setText("Unleash the power of technology and precision to craft unforgettable \nanime events. This all-in-one software empowers you to effortlessly \norchestrate every detail, from unique event creation to seamless management \nof ticketing, cosplay and trivia activities, and efficient oversight of vendors \nand staff. With intuitive interfaces, detailed reports, and comprehensive \ninventory and role management, Anime Event Master is your ultimate tool \nfor transforming any event into an epic experience, ensuring everything \n\t      runs smoothly and flawlessly.");
         jScrollPane2.setViewportView(jTextArea1);
 
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        jButton1.setText("Iniciar");
+        start.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        start.setText("Start");
+        start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -62,7 +69,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(354, 354, 354)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,7 +79,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -95,6 +102,13 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        Welcome welcome = new Welcome();
+        welcome.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_startActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,10 +146,10 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton start;
     // End of variables declaration//GEN-END:variables
 }
