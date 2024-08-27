@@ -158,7 +158,8 @@ public class Instructions extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void useActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useActionPerformed
-        // TODO add your handling code here:
+        Software soft = new Software();
+        soft.setVisible(true);
     }//GEN-LAST:event_useActionPerformed
 
     /**

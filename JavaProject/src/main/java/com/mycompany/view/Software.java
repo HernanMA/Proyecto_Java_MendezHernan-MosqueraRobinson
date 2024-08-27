@@ -282,15 +282,21 @@ public class Software extends javax.swing.JFrame {
     }//GEN-LAST:event_eventsActionPerformed
 
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxActionPerformed
-        // TODO add your handling code here:
+        BoxOffice tick = new BoxOffice();
+        tick.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_boxActionPerformed
 
     private void activityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityActionPerformed
-        // TODO add your handling code here:
+        Activities activit = new Activities();
+        activit.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_activityActionPerformed
 
     private void shopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopsActionPerformed
-        // TODO add your handling code here:
+        Shops shop = new Shops();
+        shop.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_shopsActionPerformed
 
     private void staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffActionPerformed
