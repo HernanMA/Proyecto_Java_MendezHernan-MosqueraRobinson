@@ -69,6 +69,11 @@ public class Welcome extends javax.swing.JFrame {
 
         watch.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         watch.setText("Watch");
+        watch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                watchActionPerformed(evt);
+            }
+        });
 
         back.setBackground(new java.awt.Color(234, 230, 230));
         back.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
@@ -170,6 +175,12 @@ public class Welcome extends javax.swing.JFrame {
         soft.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_enterActionPerformed
+
+    private void watchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchActionPerformed
+        Management mana = new Management();
+        mana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_watchActionPerformed
 
     /**
      * @param args the command line arguments
