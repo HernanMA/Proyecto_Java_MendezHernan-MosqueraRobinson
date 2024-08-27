@@ -116,7 +116,7 @@ public class Shops extends javax.swing.JFrame {
         jButton4.setText("Delete");
 
         jComboBox1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cosplay", "Trivia" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shop", "Restaurant" }));
 
         back4.setBackground(new java.awt.Color(234, 230, 230));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
