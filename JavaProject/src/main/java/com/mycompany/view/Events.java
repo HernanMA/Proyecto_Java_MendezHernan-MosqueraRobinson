@@ -4,6 +4,18 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.EventController;
+import com.mycompany.util.Conexion;
+import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hernan
@@ -13,10 +25,58 @@ public class Events extends javax.swing.JFrame {
     /**
      * Creates new form Events
      */
+    private EventController EventController;
+    
     public Events() {
         initComponents();
         setLocationRelativeTo(null); 
+        EventController eventController = new EventController(this);
+        mostrarDatosEnTableEvents();
     }
+    
+    
+    public void updateTable() {
+    DefaultTableModel model = (DefaultTableModel) tableEvents.getModel();
+    model.setRowCount(0); // Limpiar la tabla antes de recargar los datos
+
+    Connection conn = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    try {
+        conn = Conexion.getInstance().conectar();
+        stmt = conn.createStatement();
+
+        String sql = "SELECT id, name, date_time, organizer_id, age_classification_id, status FROM Events";
+        rs = stmt.executeQuery(sql);
+
+        while (rs.next()) {
+            Object[] row = new Object[6];
+            row[0] = rs.getInt("id");
+            row[1] = rs.getString("name");
+            row[2] = rs.getTimestamp("date_time");
+            row[3] = rs.getInt("organizer_id");
+            row[4] = rs.getInt("age_classification_id");
+            row[5] = rs.getString("status");
+            model.addRow(row);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar la tabla: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            Conexion.getInstance().cerrarConexion(conn);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cerrar los recursos: " + e.getMessage());
+        }
+    }
+}
+
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,7 +94,7 @@ public class Events extends javax.swing.JFrame {
         AgeText = new javax.swing.JTextField();
         organizerText = new javax.swing.JTextField();
         dateText = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        createEvent = new javax.swing.JButton();
         deleteEvent = new javax.swing.JButton();
         editEvent = new javax.swing.JButton();
         updateEvent = new javax.swing.JButton();
@@ -83,21 +143,41 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(231, 231, 231));
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton1.setText("Create Event");
+        createEvent.setBackground(new java.awt.Color(231, 231, 231));
+        createEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        createEvent.setText("Create Event");
+        createEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createEventActionPerformed(evt);
+            }
+        });
 
         deleteEvent.setBackground(new java.awt.Color(231, 231, 231));
         deleteEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         deleteEvent.setText("Delete Event");
+        deleteEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEventActionPerformed(evt);
+            }
+        });
 
         editEvent.setBackground(new java.awt.Color(231, 231, 231));
         editEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         editEvent.setText("Edit Event");
+        editEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editEventActionPerformed(evt);
+            }
+        });
 
         updateEvent.setBackground(new java.awt.Color(231, 231, 231));
         updateEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         updateEvent.setText("Update Event");
+        updateEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEventActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel2.setText("Event's Name");
@@ -164,7 +244,7 @@ public class Events extends javax.swing.JFrame {
                                 .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(111, 111, 111)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -180,7 +260,7 @@ public class Events extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(createEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,6 +386,132 @@ public class Events extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_statusTextActionPerformed
 
+    private void createEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventActionPerformed
+        try {
+        String eventName = eventNameText.getText();
+        String date = dateText.getText();
+        int organizerId = Integer.parseInt(organizerText.getText());
+        int ageClassificationId = Integer.parseInt(AgeText.getText());
+        String status = statusText.getText();
+
+        if (eventName.isEmpty() || date.isEmpty() || status.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        EventController eventController = new EventController(this);
+        boolean success = eventController.createEvent(eventName, date, organizerId, ageClassificationId, status);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Evento creado exitosamente.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un número válido para ID de organizador y clasificación por edad.");
+    }
+    }//GEN-LAST:event_createEventActionPerformed
+
+    private void editEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEventActionPerformed
+        try {
+        int eventId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del evento a editar:"));
+        String eventName = eventNameText.getText();
+        String date = dateText.getText();
+        int organizerId = Integer.parseInt(organizerText.getText());
+        int ageClassificationId = Integer.parseInt(AgeText.getText());
+        String status = statusText.getText();
+
+        // Validar campos vacíos
+        if (eventName.isEmpty() || date.isEmpty() || status.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+       
+        EventController eventController = new EventController(this);
+        boolean success = eventController.createEvent(eventName, date, organizerId, ageClassificationId, status);
+
+        // Mostrar mensaje de éxito o error
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Evento actualizado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el evento.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un número válido para ID de organizador y clasificación por edad.");
+    }
+    }//GEN-LAST:event_editEventActionPerformed
+
+    private void deleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEventActionPerformed
+        try {
+        int eventId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del evento a eliminar:"));
+
+        // Llamar al controlador para eliminar el evento
+        boolean success = new EventController(this).deleteEvent(eventId);
+
+        // Mostrar mensaje de éxito o error
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el evento.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_deleteEventActionPerformed
+
+    private void updateEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateEventActionPerformed
+
+    DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Name", "Date/Time", "Organizer ID", "Age Classification ID", "Status"}, 0);
+
+    public void mostrarDatosEnTableEvents() {
+    Connection con = null;
+    try {
+        // Conectarse a la base de datos
+        con = Conexion.getInstance().conectar();
+
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel();
+
+        // Consulta SQL
+        String sql = "SELECT id, name, date_time, organizer_id, age_classification_id, status FROM Events";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        // Obtener los metadatos para agregar los nombres de las columnas al modelo
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(rsmd.getColumnName(i));
+        }
+
+        // Agregar filas de datos al modelo
+        while (rs.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                row[i] = rs.getObject(i + 1);
+            }
+            model.addRow(row);
+        }
+
+        // Asignar el modelo al JTable
+        tableEvents.setModel(model);
+
+        // Cerrar recursos
+        rs.close();
+        stmt.close();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (con != null) {
+            Conexion.getInstance().cerrarConexion(con);
+        }
+    }
+}
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -344,11 +550,11 @@ public class Events extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AgeText;
     private javax.swing.JButton back1;
+    private javax.swing.JButton createEvent;
     private javax.swing.JTextField dateText;
     private javax.swing.JButton deleteEvent;
     private javax.swing.JButton editEvent;
     private javax.swing.JTextField eventNameText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
