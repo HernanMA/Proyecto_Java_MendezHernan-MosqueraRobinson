@@ -4,6 +4,12 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.EmployeeController;
+import com.mycompany.model.Employee;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hernan
@@ -16,6 +22,8 @@ public class Staff extends javax.swing.JFrame {
     public Staff() {
         initComponents();
         setLocationRelativeTo(null); 
+        EmployeeController employeeController = new EmployeeController(this, StaffTable);
+        employeeController.updateTable();
     }
 
     /**
@@ -29,7 +37,7 @@ public class Staff extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        StaffTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -37,19 +45,21 @@ public class Staff extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        NameEmployee = new javax.swing.JTextField();
+        BirthDate = new javax.swing.JTextField();
+        identification = new javax.swing.JTextField();
+        StatusID = new javax.swing.JTextField();
+        RoleID = new javax.swing.JTextField();
+        UpdateEmployee = new javax.swing.JButton();
+        DeleteEmployee = new javax.swing.JButton();
         back4 = new javax.swing.JButton();
+        textSearch = new javax.swing.JTextField();
+        SearchEmployee = new javax.swing.JButton();
+        Create = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        StaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -62,7 +72,7 @@ public class Staff extends javax.swing.JFrame {
                 "id", "Name", "Identification", "Birth_date", "Role_id", "Status_id"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(StaffTable);
 
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Employees");
@@ -105,14 +115,21 @@ public class Staff extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel6.setText("Role Id");
 
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton1.setText("Update");
+        UpdateEmployee.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        UpdateEmployee.setText("Update");
+        UpdateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateEmployeeActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton2.setText("Delete");
-
-        jButton3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton3.setText("Edit");
+        DeleteEmployee.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        DeleteEmployee.setText("Delete");
+        DeleteEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteEmployeeActionPerformed(evt);
+            }
+        });
 
         back4.setBackground(new java.awt.Color(234, 230, 230));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
@@ -120,6 +137,28 @@ public class Staff extends javax.swing.JFrame {
         back4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back4ActionPerformed(evt);
+            }
+        });
+
+        textSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textSearchActionPerformed(evt);
+            }
+        });
+
+        SearchEmployee.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        SearchEmployee.setText("Search");
+        SearchEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchEmployeeActionPerformed(evt);
+            }
+        });
+
+        Create.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        Create.setText("Create");
+        Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateActionPerformed(evt);
             }
         });
 
@@ -134,28 +173,32 @@ public class Staff extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(NameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(identification, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(92, 92, 92)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(RoleID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StatusID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(back4)))
+                        .addComponent(BirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
+                        .addComponent(SearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(UpdateEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(back4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Create, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
@@ -164,33 +207,38 @@ public class Staff extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(NameEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(RoleID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UpdateEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(identification, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(StatusID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(BirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(SearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(back4)
-                        .addContainerGap())))
+                        .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(Create, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(back4)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,6 +270,124 @@ public class Staff extends javax.swing.JFrame {
         soft.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back4ActionPerformed
+
+    private void textSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textSearchActionPerformed
+
+    private void UpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmployeeActionPerformed
+        try {
+        int employeeId = Integer.parseInt(textSearch.getText());
+        String name = NameEmployee.getText();
+        String id = identification.getText();  // Ahora usando correctamente el JTextField
+        LocalDate birthDate = LocalDate.parse(BirthDate.getText());
+        int roleId = Integer.parseInt(RoleID.getText());
+        int statusId = Integer.parseInt(StatusID.getText());
+
+        if (name.isEmpty() || id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        EmployeeController employeeController = new EmployeeController(this, StaffTable);
+        Employee employee = new Employee(name, id, birthDate, roleId, statusId);
+
+        boolean success = employeeController.updateEmployee(employeeId, employee);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Empleado actualizado exitosamente.");
+            employeeController.updateTable(); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el empleado.");
+        }
+    } catch (NumberFormatException | DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa datos válidos.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_UpdateEmployeeActionPerformed
+
+    private void DeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeActionPerformed
+        try {
+        int employeeId = Integer.parseInt(textSearch.getText());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este empleado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; 
+        }
+
+        EmployeeController employeeController = new EmployeeController(this, StaffTable);
+        boolean success = employeeController.deleteEmployee(employeeId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Empleado eliminado exitosamente.");
+            employeeController.updateTable(); 
+            NameEmployee.setText("");
+            identification.setText("");
+            BirthDate.setText("");
+            RoleID.setText("");
+            StatusID.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el empleado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_DeleteEmployeeActionPerformed
+
+    private void SearchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeeActionPerformed
+        try {
+        int employeeId = Integer.parseInt(textSearch.getText());
+        EmployeeController employeeController = new EmployeeController(this, StaffTable);
+        Employee employee = employeeController.searchEmployee(employeeId);
+
+        if (employee != null) {
+            NameEmployee.setText(employee.getName());
+            identification.setText(employee.getIdentification());
+            BirthDate.setText(employee.getBirthDate().toString());  // Asegúrate de que el formato sea correcto
+            RoleID.setText(String.valueOf(employee.getRoleId()));
+            StatusID.setText(String.valueOf(employee.getStatusId()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Empleado no encontrado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_SearchEmployeeActionPerformed
+
+    private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
+        try {
+        String name = NameEmployee.getText();  // Obtén el nombre del empleado
+        String id = identification.getText();  // Obtén la identificación del empleado
+        LocalDate birthDate = LocalDate.parse(BirthDate.getText());  // Convierte la fecha de nacimiento
+        int roleId = Integer.parseInt(RoleID.getText());  // Obtén el ID del rol
+        int statusId = Integer.parseInt(StatusID.getText());  // Obtén el ID del estado
+
+        // Validación de campos vacíos
+        if (name.isEmpty() || id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        // Crear un nuevo controlador de empleados
+        EmployeeController employeeController = new EmployeeController(this, StaffTable);
+        Employee employee = new Employee(name, id, birthDate, roleId, statusId);
+
+        // Llamar al método para crear el empleado
+        boolean success = employeeController.createEmployee(name, id, birthDate, roleId, statusId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Empleado creado exitosamente.");
+            employeeController.updateTable();  // Actualizar la tabla para mostrar el nuevo empleado
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al crear el empleado.");
+        }
+    } catch (NumberFormatException | DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa datos válidos.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_CreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,10 +425,17 @@ public class Staff extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BirthDate;
+    private javax.swing.JButton Create;
+    private javax.swing.JButton DeleteEmployee;
+    private javax.swing.JTextField NameEmployee;
+    private javax.swing.JTextField RoleID;
+    private javax.swing.JButton SearchEmployee;
+    private javax.swing.JTable StaffTable;
+    private javax.swing.JTextField StatusID;
+    private javax.swing.JButton UpdateEmployee;
     private javax.swing.JButton back4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField identification;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,11 +445,6 @@ public class Staff extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 }
