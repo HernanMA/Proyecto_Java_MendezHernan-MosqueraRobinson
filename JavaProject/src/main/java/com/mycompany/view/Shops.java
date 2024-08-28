@@ -4,6 +4,10 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.ShopController;
+import com.mycompany.model.Shop;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hernan
@@ -16,6 +20,8 @@ public class Shops extends javax.swing.JFrame {
     public Shops() {
         initComponents();
         setLocationRelativeTo(null); 
+        ShopController shopController = new ShopController(this, ShopTable);
+        shopController.updateTable();
     }
 
     /**
@@ -29,7 +35,7 @@ public class Shops extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ShopTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -37,19 +43,20 @@ public class Shops extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Event_Id = new javax.swing.JTextField();
+        ManagerId = new javax.swing.JTextField();
+        ShopName = new javax.swing.JTextField();
+        addShops = new javax.swing.JButton();
+        UpdateShops = new javax.swing.JButton();
+        DeleteShops = new javax.swing.JButton();
+        ShopsOptions = new javax.swing.JComboBox<>();
         back4 = new javax.swing.JButton();
+        SearchShops = new javax.swing.JButton();
+        textSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ShopTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -61,7 +68,7 @@ public class Shops extends javax.swing.JFrame {
                 "Id", "Name", "Category", "Event_Id", "Manager_Id"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ShopTable);
 
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("SHOPS AND RESTAURANTS");
@@ -103,20 +110,32 @@ public class Shops extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel9.setText("Manager Id");
 
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton1.setText("Add");
+        addShops.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        addShops.setText("Add");
+        addShops.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addShopsActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton2.setText("Edit");
+        UpdateShops.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        UpdateShops.setText("Update");
+        UpdateShops.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateShopsActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton3.setText("Update");
+        DeleteShops.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        DeleteShops.setText("Delete");
+        DeleteShops.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteShopsActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton4.setText("Delete");
-
-        jComboBox1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shop", "Restaurant" }));
+        ShopsOptions.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        ShopsOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shop", "Restaurant" }));
 
         back4.setBackground(new java.awt.Color(234, 230, 230));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
@@ -124,6 +143,14 @@ public class Shops extends javax.swing.JFrame {
         back4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back4ActionPerformed(evt);
+            }
+        });
+
+        SearchShops.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        SearchShops.setText("Search");
+        SearchShops.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchShopsActionPerformed(evt);
             }
         });
 
@@ -142,30 +169,32 @@ public class Shops extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ShopName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ShopsOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(66, 66, 66)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Event_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(404, 404, 404)
                         .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(75, 75, 75))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(841, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(75, 75, 75)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UpdateShops, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(DeleteShops, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addShops, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(SearchShops, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,36 +202,36 @@ public class Shops extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addShops, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ShopName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Event_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ShopsOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UpdateShops, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(back4)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(DeleteShops, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(SearchShops, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7)))
                         .addContainerGap())))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(67, 67, 67)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(125, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,6 +266,106 @@ public class Shops extends javax.swing.JFrame {
         soft.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back4ActionPerformed
+
+    private void addShopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addShopsActionPerformed
+        try {
+        String shopName = ShopName.getText();
+        String category = ShopsOptions.getSelectedItem().toString();
+        int eventId = Integer.parseInt(Event_Id.getText());
+        int managerId = Integer.parseInt(ManagerId.getText());
+
+        if (shopName.isEmpty() || category.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        ShopController shopController = new ShopController(this, ShopTable);
+        boolean success = shopController.createShop(shopName, category, eventId, managerId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Comercio creado exitosamente.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa números válidos para ID de evento y ID de gerente.");
+    }
+    }//GEN-LAST:event_addShopsActionPerformed
+
+    private void UpdateShopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateShopsActionPerformed
+        try {
+        int shopId = Integer.parseInt(textSearch.getText());  
+        String shopName = ShopName.getText();                
+        String category = ShopsOptions.getSelectedItem().toString(); 
+        int eventId = Integer.parseInt(Event_Id.getText());  
+        int managerId = Integer.parseInt(ManagerId.getText());  
+
+        if (shopName.isEmpty() || category.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        ShopController shopController = new ShopController(this, ShopTable);
+        Shop shop = new Shop(shopName, category, eventId, managerId);
+
+        boolean success = shopController.updateShop(shopId, shop);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Comercio actualizado exitosamente.");
+            shopController.updateTable(); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el comercio.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa números válidos para ID de comercio, ID de evento y ID de gerente.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_UpdateShopsActionPerformed
+
+    private void DeleteShopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteShopsActionPerformed
+        try {
+        int shopId = Integer.parseInt(textSearch.getText());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este comercio?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; 
+        }
+
+        ShopController shopController = new ShopController(this, ShopTable);
+        boolean success = shopController.deleteShop(shopId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Comercio eliminado exitosamente.");
+            shopController.updateTable(); 
+            ShopName.setText("");
+            Event_Id.setText("");
+            ManagerId.setText("");
+            ShopsOptions.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el comercio.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_DeleteShopsActionPerformed
+
+    private void SearchShopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchShopsActionPerformed
+        try {
+        int shopId = Integer.parseInt(textSearch.getText());
+        ShopController shopController = new ShopController(this, ShopTable);
+        Shop shop = shopController.searchShop(shopId);
+
+        if (shop != null) {
+            ShopName.setText(shop.getName());
+            ShopsOptions.setSelectedItem(shop.getCategory());
+            Event_Id.setText(String.valueOf(shop.getEventId()));
+            ManagerId.setText(String.valueOf(shop.getManagerId()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Comercio no encontrado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_SearchShopsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,12 +403,16 @@ public class Shops extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteShops;
+    private javax.swing.JTextField Event_Id;
+    private javax.swing.JTextField ManagerId;
+    private javax.swing.JButton SearchShops;
+    private javax.swing.JTextField ShopName;
+    private javax.swing.JTable ShopTable;
+    private javax.swing.JComboBox<String> ShopsOptions;
+    private javax.swing.JButton UpdateShops;
+    private javax.swing.JButton addShops;
     private javax.swing.JButton back4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -289,9 +422,6 @@ public class Shops extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 }
