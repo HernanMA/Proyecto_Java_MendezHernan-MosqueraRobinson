@@ -5,8 +5,12 @@
 package com.mycompany.view;
 
 import com.mycompany.controller.ActivityController;
+import com.mycompany.controller.TriviaRoundController;
 import com.mycompany.model.Activity;
+import com.mycompany.model.CosplayScore;
+import com.mycompany.model.CosplayScoreController;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,12 +21,19 @@ public class Activities extends javax.swing.JFrame {
     /**
      * Creates new form Activities
      */
+    
     public Activities() {
         initComponents();
         setLocationRelativeTo(null); 
         ActivityController activityController = new ActivityController(this, ActivityTable);
         activityController.updateTable();
+        TriviaRoundController triviaRoundController = new TriviaRoundController(this, TriviaTable);
+        triviaRoundController.updateTable();
+        cosplayScoreController = new CosplayScoreController(this, CosplayTable); // Inicialización
+        cosplayScoreController.updateTable();
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,17 +63,17 @@ public class Activities extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         CosplayTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        AddButton = new javax.swing.JToggleButton();
+        DeleteButton = new javax.swing.JToggleButton();
+        EditCosplay = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jTextField10 = new javax.swing.JTextField();
+        JudgeId = new javax.swing.JTextField();
+        ParticipantId = new javax.swing.JTextField();
+        ScoreCosplay = new javax.swing.JTextField();
+        SearchCosplay = new javax.swing.JToggleButton();
+        SearchCosplayText = new javax.swing.JTextField();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -148,27 +159,27 @@ public class Activities extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 36)); // NOI18N
         jLabel2.setText("COSPLAY");
 
-        jToggleButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jToggleButton1.setText("Add ");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        AddButton.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        AddButton.setText("Add ");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                AddButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jToggleButton2.setText("Delete");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        DeleteButton.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                DeleteButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jToggleButton3.setText("Edit");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        EditCosplay.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        EditCosplay.setText("Edit");
+        EditCosplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                EditCosplayActionPerformed(evt);
             }
         });
 
@@ -181,11 +192,11 @@ public class Activities extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel14.setText("Score");
 
-        jToggleButton4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jToggleButton4.setText("Search");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        SearchCosplay.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        SearchCosplay.setText("Search");
+        SearchCosplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                SearchCosplayActionPerformed(evt);
             }
         });
 
@@ -205,30 +216,28 @@ public class Activities extends javax.swing.JFrame {
                         .addGap(304, 304, 304))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(74, 74, 74)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JudgeId))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(68, 68, 68)
-                        .addComponent(jToggleButton4)
+                        .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addComponent(ParticipantId, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ScoreCosplay, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
+                .addComponent(SearchCosplay)
+                .addGap(18, 18, 18)
+                .addComponent(SearchCosplayText, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditCosplay, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
         jPanel5Layout.setVerticalGroup(
@@ -241,24 +250,24 @@ public class Activities extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ScoreCosplay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton4)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ParticipantId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchCosplay)
+                            .addComponent(SearchCosplayText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jToggleButton3)
+                            .addComponent(EditCosplay)
                             .addComponent(jLabel13)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JudgeId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jToggleButton1)
+                        .addComponent(AddButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton2)
+                        .addComponent(DeleteButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -513,21 +522,63 @@ public class Activities extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_back4ActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:---------------------------
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        try {
+        int participantId = Integer.parseInt(ParticipantId.getText());
+        int judgeId = Integer.parseInt(JudgeId.getText());
+        double score = Double.parseDouble(ScoreCosplay.getText());
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:---------------------------
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+        cosplayScoreController.createCosplayScore(participantId, judgeId, score); // Usar la instancia global
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:---------------------------
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+    }
+    }//GEN-LAST:event_AddButtonActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here: ---------------------------
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        try {
+            int scoreId = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID a eliminar:"));
+
+            CosplayScoreController cosplayScoreController = new CosplayScoreController(this, CosplayTable);
+            cosplayScoreController.deleteCosplayScore(scoreId);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void EditCosplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCosplayActionPerformed
+        try {
+            int scoreId = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID a actualizar:"));
+            int participantId = Integer.parseInt(ParticipantId.getText());
+            int judgeId = Integer.parseInt(JudgeId.getText());
+            double score = Double.parseDouble(ScoreCosplay.getText());
+
+            CosplayScoreController cosplayScoreController = new CosplayScoreController(this, CosplayTable);
+            cosplayScoreController.updateCosplayScore(scoreId, participantId, judgeId, score);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+        }
+    }//GEN-LAST:event_EditCosplayActionPerformed
+
+    private CosplayScoreController cosplayScoreController;
+    private void SearchCosplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCosplayActionPerformed
+        try {
+        int scoreId = Integer.parseInt(SearchCosplayText.getText());
+        CosplayScore scoreResult = cosplayScoreController.searchCosplayScore(scoreId);
+
+        if (scoreResult != null) {
+            ParticipantId.setText(String.valueOf(scoreResult.getParticipantId()));
+            JudgeId.setText(String.valueOf(scoreResult.getJudgeId()));
+            ScoreCosplay.setText(String.valueOf(scoreResult.getScore()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Puntaje no encontrado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_SearchCosplayActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         try {
@@ -651,16 +702,24 @@ public class Activities extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ActivityTable;
+    private javax.swing.JToggleButton AddButton;
     private javax.swing.JTextField CategoriId;
     private javax.swing.JTable CosplayTable;
     private javax.swing.JButton Create;
     private javax.swing.JTextField DateActivity;
     private javax.swing.JButton Delete;
+    private javax.swing.JToggleButton DeleteButton;
+    private javax.swing.JToggleButton EditCosplay;
     private javax.swing.JTextField EventId;
+    private javax.swing.JTextField JudgeId;
     private javax.swing.JTextField ManagerId;
     private javax.swing.JTextField NameActivity;
+    private javax.swing.JTextField ParticipantId;
     private javax.swing.JTextField ParticipantsNum;
+    private javax.swing.JTextField ScoreCosplay;
     private javax.swing.JButton Search;
+    private javax.swing.JToggleButton SearchCosplay;
+    private javax.swing.JTextField SearchCosplayText;
     private javax.swing.JTextField SearchText;
     private javax.swing.JTable TriviaTable;
     private javax.swing.JComboBox<String> TypeActivity;
@@ -697,13 +756,5 @@ public class Activities extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
     // End of variables declaration//GEN-END:variables
 }
