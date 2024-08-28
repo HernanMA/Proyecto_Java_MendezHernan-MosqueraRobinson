@@ -4,6 +4,11 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.TicketController;
+import com.mycompany.model.Ticket;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hernan
@@ -16,6 +21,8 @@ public class Tickets extends javax.swing.JFrame {
     public Tickets() {
         initComponents();
         setLocationRelativeTo(null); 
+        TicketController ticketController = new TicketController(this, TableTickets);
+        ticketController.updateTable();
     }
 
     /**
@@ -27,9 +34,10 @@ public class Tickets extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableTickets = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -41,21 +49,25 @@ public class Tickets extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        StatusTickets = new javax.swing.JTextField();
+        Ticket_Id = new javax.swing.JTextField();
+        PriceTickets = new javax.swing.JTextField();
+        NameTickets = new javax.swing.JTextField();
+        CustomerTickets = new javax.swing.JTextField();
+        AgeClassification = new javax.swing.JTextField();
+        AdditionalCost = new javax.swing.JTextField();
+        CreateTicket = new javax.swing.JButton();
+        UpdateTicket = new javax.swing.JButton();
+        DeleteTicket = new javax.swing.JButton();
         back4 = new javax.swing.JButton();
+        searchTicket = new javax.swing.JTextField();
+        SearchTicket = new javax.swing.JButton();
+
+        jLabel10.setText("jLabel10");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -66,7 +78,7 @@ public class Tickets extends javax.swing.JFrame {
                 "Id", "Name", "Price", "Age_classification", "Additional_Cost", "Status_Id", "Ticket_Booth", "Customer"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TableTickets);
 
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Tickets!");
@@ -123,7 +135,7 @@ public class Tickets extends javax.swing.JFrame {
         jLabel6.setText("Age Classification");
 
         jLabel7.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        jLabel7.setText("Ticket Booth");
+        jLabel7.setText("Ticket Booth Id");
 
         jLabel8.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel8.setText("Additional Cost");
@@ -131,14 +143,29 @@ public class Tickets extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel9.setText("Customer");
 
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton1.setText("Create");
+        CreateTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        CreateTicket.setText("Create");
+        CreateTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateTicketActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton2.setText("Update");
+        UpdateTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        UpdateTicket.setText("Update");
+        UpdateTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateTicketActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton4.setText("Delete");
+        DeleteTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        DeleteTicket.setText("Delete");
+        DeleteTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteTicketActionPerformed(evt);
+            }
+        });
 
         back4.setBackground(new java.awt.Color(234, 230, 230));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
@@ -146,6 +173,14 @@ public class Tickets extends javax.swing.JFrame {
         back4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back4ActionPerformed(evt);
+            }
+        });
+
+        SearchTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        SearchTicket.setText("Search");
+        SearchTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchTicketActionPerformed(evt);
             }
         });
 
@@ -162,11 +197,12 @@ public class Tickets extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NameTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PriceTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StatusTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CustomerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -176,21 +212,23 @@ public class Tickets extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 6, Short.MAX_VALUE))
+                                    .addComponent(AdditionalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Ticket_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(AgeClassification, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CreateTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DeleteTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UpdateTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SearchTicket)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addComponent(back4)
                         .addContainerGap())))
         );
@@ -204,35 +242,38 @@ public class Tickets extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PriceTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AdditionalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(StatusTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Ticket_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NameTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AgeClassification, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CreateTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UpdateTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DeleteTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CustomerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(back4)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(back4)
+                            .addComponent(searchTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
 
@@ -265,6 +306,118 @@ public class Tickets extends javax.swing.JFrame {
         soft.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_back4ActionPerformed
+
+    private void CreateTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateTicketActionPerformed
+        try {
+            String ticketName = this.NameTickets.getText();
+            BigDecimal price = new BigDecimal(this.PriceTickets.getText());
+            Integer customer = Integer.parseInt(this.CustomerTickets.getText());
+            Integer statusId = Integer.parseInt(this.StatusTickets.getText());
+            Integer ageClassification = Integer.parseInt(this.AgeClassification.getText());
+            BigDecimal additionalCost = new BigDecimal(this.AdditionalCost.getText());
+            Integer ticketBooth = Integer.parseInt(this.Ticket_Id.getText());
+
+            if (ticketName.isEmpty() || price == null || customer == null || statusId == null || ageClassification == null || additionalCost == null || ticketBooth == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+                return;
+            }
+
+            TicketController ticketController = new TicketController(this, TableTickets);
+            boolean success = ticketController.createTicket(ticketName, price, ageClassification, additionalCost, statusId, ticketBooth, customer);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Ticket creado exitosamente.");
+            }
+        } catch (NumberFormatException | NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos en los campos numéricos.");
+        }
+    }//GEN-LAST:event_CreateTicketActionPerformed
+
+    private void UpdateTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateTicketActionPerformed
+        try {
+            int ticketId = Integer.parseInt(searchTicket.getText());
+            String ticketName = this.NameTickets.getText();
+            BigDecimal price = new BigDecimal(this.PriceTickets.getText());
+            Integer customer = Integer.parseInt(this.CustomerTickets.getText());
+            Integer statusId = Integer.parseInt(this.StatusTickets.getText());
+            Integer ageClassification = Integer.parseInt(this.AgeClassification.getText());
+            BigDecimal additionalCost = new BigDecimal(this.AdditionalCost.getText());
+            Integer ticketBooth = Integer.parseInt(this.Ticket_Id.getText());
+
+            if (ticketName.isEmpty() || price == null || customer == null || statusId == null || ageClassification == null || additionalCost == null || ticketBooth == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+                return;
+            }
+
+            TicketController ticketController = new TicketController(this, TableTickets);
+            Ticket ticket = new Ticket(ticketName, price, ageClassification, additionalCost, statusId, ticketBooth, customer);
+
+            boolean success = ticketController.updateTicket(ticketId, ticket);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Ticket actualizado exitosamente.");
+                ticketController.updateTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar el ticket.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa números válidos para ID del ticket y otros campos numéricos.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_UpdateTicketActionPerformed
+
+    private void DeleteTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteTicketActionPerformed
+        try {
+            int ticketId = Integer.parseInt(searchTicket.getText());
+
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este ticket?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            TicketController ticketController = new TicketController(this, TableTickets);
+            boolean success = ticketController.deleteTicket(ticketId);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Ticket eliminado exitosamente.");
+                ticketController.updateTable();
+                NameTickets.setText("");
+                PriceTickets.setText("");
+                CustomerTickets.setText("");
+                StatusTickets.setText("");
+                AgeClassification.setText("");
+                AdditionalCost.setText("");
+                Ticket_Id.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar el ticket.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+        }
+    }//GEN-LAST:event_DeleteTicketActionPerformed
+
+    private void SearchTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTicketActionPerformed
+        try {
+            int ticketId = Integer.parseInt(searchTicket.getText());
+            TicketController ticketController = new TicketController(this, TableTickets);
+            Ticket ticket = ticketController.searchTicket(ticketId);
+
+            if (ticket != null) {
+                NameTickets.setText(ticket.getName());
+                PriceTickets.setText(String.valueOf(ticket.getPrice()));
+                CustomerTickets.setText(String.valueOf(ticket.getCustomer_id()));
+                StatusTickets.setText(String.valueOf(ticket.getStatus_id()));
+                AgeClassification.setText(String.valueOf(ticket.getAge_classification_id()));
+                AdditionalCost.setText(String.valueOf(ticket.getAdditional_cost()));
+                Ticket_Id.setText(String.valueOf(ticket.getTicket_booth_id()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Ticket no encontrado.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+        }
+    }//GEN-LAST:event_SearchTicketActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,12 +455,22 @@ public class Tickets extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AdditionalCost;
+    private javax.swing.JTextField AgeClassification;
+    private javax.swing.JButton CreateTicket;
+    private javax.swing.JTextField CustomerTickets;
+    private javax.swing.JButton DeleteTicket;
+    private javax.swing.JTextField NameTickets;
+    private javax.swing.JTextField PriceTickets;
+    private javax.swing.JButton SearchTicket;
+    private javax.swing.JTextField StatusTickets;
+    private javax.swing.JTable TableTickets;
+    private javax.swing.JTextField Ticket_Id;
+    private javax.swing.JButton UpdateTicket;
     private javax.swing.JButton back4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -319,13 +482,6 @@ public class Tickets extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField searchTicket;
     // End of variables declaration//GEN-END:variables
 }
