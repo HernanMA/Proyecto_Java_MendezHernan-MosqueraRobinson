@@ -11,9 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +23,7 @@ public class EventDAO {
         this.conexion = Conexion.getInstance();
     }
 
-   public boolean createEvent(String name, String dateStr, int organizerId, int ageClassificationId, String status) throws Exception {
+    public boolean createEvent(String name, String dateStr, int organizerId, int ageClassificationId, String status) throws Exception {
         String sql = "INSERT INTO Events (name, date_time, organizer_id, age_classification_id, status) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = conexion.conectar();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -45,7 +42,6 @@ public class EventDAO {
         } catch (SQLException e) {
             String errorMessage = e.getMessage().toLowerCase();
 
-            // Detectar errores específicos y lanzar una excepción con un mensaje más claro
             if (errorMessage.contains("column 'name' cannot be null")) {
                 throw new Exception("El campo 'Nombre' es obligatorio.");
             } else if (errorMessage.contains("column 'date_time' cannot be null")) {
@@ -75,7 +71,7 @@ public class EventDAO {
 
             return new Event(name, dateTime, organizerId, ageClassificationId, status);
         } else {
-            return null; // No se encontró el evento
+            return null; 
         }
 
     } catch (SQLException e) {
