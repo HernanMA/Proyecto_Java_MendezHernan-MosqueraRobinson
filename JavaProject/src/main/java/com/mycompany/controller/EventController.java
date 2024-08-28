@@ -15,14 +15,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class EventController {
     private EventDAO eventDAO;
-    private Events Events; // Tu JFrame
+    private Events Events; 
+    private JTable tableTickets;
 
     public EventController(Events eventsView) {
         this.eventDAO = new EventDAO();
         this.Events = eventsView;
+        this.tableTickets = tableTickets;
     }
 
     public boolean createEvent(String name, String dateStr, int organizerId, int ageClassificationId, String status) {
@@ -44,7 +47,7 @@ public class EventController {
         }
         return success;
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(Events, e.getMessage()); // Muestra el mensaje de error
+        JOptionPane.showMessageDialog(Events, e.getMessage()); 
         return false;
     }
 }
