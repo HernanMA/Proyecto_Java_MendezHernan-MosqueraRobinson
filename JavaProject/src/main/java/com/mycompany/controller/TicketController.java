@@ -9,6 +9,7 @@ import com.mycompany.model.TicketDAO;
 import com.mycompany.util.Conexion;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -99,5 +100,52 @@ public class TicketController {
             }
         }
     }
+    
+    public void filterTicketsByStatus(String status) {
+    DefaultTableModel model = (DefaultTableModel) ticketsTable.getModel();
+    model.setRowCount(0);
+
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        conn = Conexion.getInstance().conectar();
+        
+        String sql = "SELECT t.id, t.name, t.price, t.age_classification_id, t.additional_cost, t.status_id, t.ticket_booth_id, t.customer_id " +
+                     "FROM Tickets t " +
+                     "JOIN TicketStatuses ts ON t.status_id = ts.id " +
+                     "WHERE ts.status = ?";
+        
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, status);
+        rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            Object[] row = new Object[8];
+            row[0] = rs.getInt("id");
+            row[1] = rs.getString("name");
+            row[2] = rs.getBigDecimal("price");
+            row[3] = rs.getInt("age_classification_id");
+            row[4] = rs.getBigDecimal("additional_cost");
+            row[5] = rs.getInt("status_id");
+            row[6] = rs.getInt("ticket_booth_id");
+            row[7] = rs.getInt("customer_id");
+            model.addRow(row);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(ticketsView, "Error al filtrar la tabla: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            Conexion.getInstance().cerrarConexion(conn);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(ticketsView, "Error al cerrar los recursos: " + e.getMessage());
+        }
+    }
+}
+
 }
 
