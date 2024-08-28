@@ -77,10 +77,6 @@ public class Events extends javax.swing.JFrame {
     }
 }
 
-
-
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -441,7 +437,6 @@ public class Events extends javax.swing.JFrame {
         EventController eventController = new EventController(this);
         Event event = new Event(eventName, LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), organizerId, ageClassificationId, status);
 
-        // Aquí debes pasar tanto el ID del evento como el objeto Event
         boolean success = eventController.updateEvent(eventId, event);
 
         if (success) {
@@ -463,7 +458,7 @@ public class Events extends javax.swing.JFrame {
 
         int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este evento?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
-            return; // Si el usuario cancela, no se realiza ninguna acción.
+            return; 
         }
 
         EventController eventController = new EventController(this);
@@ -471,8 +466,7 @@ public class Events extends javax.swing.JFrame {
 
         if (success) {
             JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
-            this.updateTable(); // Actualizar la tabla en tiempo real
-            // Limpiar los campos de texto después de la eliminación
+            this.updateTable(); 
             eventNameText.setText("");
             dateText.setText("");
             organizerText.setText("");
@@ -515,25 +509,20 @@ public class Events extends javax.swing.JFrame {
     public void mostrarDatosEnTableEvents() {
     Connection con = null;
     try {
-        // Conectarse a la base de datos
         con = Conexion.getInstance().conectar();
 
-        // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel();
 
-        // Consulta SQL
         String sql = "SELECT id, name, date_time, organizer_id, age_classification_id, status FROM Events";
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
-        // Obtener los metadatos para agregar los nombres de las columnas al modelo
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnCount = rsmd.getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             model.addColumn(rsmd.getColumnName(i));
         }
 
-        // Agregar filas de datos al modelo
         while (rs.next()) {
             Object[] row = new Object[columnCount];
             for (int i = 0; i < columnCount; i++) {
@@ -542,10 +531,8 @@ public class Events extends javax.swing.JFrame {
             model.addRow(row);
         }
 
-        // Asignar el modelo al JTable
         tableEvents.setModel(model);
 
-        // Cerrar recursos
         rs.close();
         stmt.close();
 

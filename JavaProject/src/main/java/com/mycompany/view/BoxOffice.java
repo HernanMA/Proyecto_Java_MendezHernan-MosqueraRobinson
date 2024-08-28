@@ -4,6 +4,10 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.TicketBoothController;
+import com.mycompany.model.TicketBooth;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hernan
@@ -15,7 +19,9 @@ public class BoxOffice extends javax.swing.JFrame {
      */
     public BoxOffice() {
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        TicketBoothController ticketBoothController = new TicketBoothController(this, tableTickets);
+        ticketBoothController.updateTable();
     }
 
     /**
@@ -29,7 +35,7 @@ public class BoxOffice extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableTickets = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -38,18 +44,19 @@ public class BoxOffice extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        EventId = new javax.swing.JTextField();
+        Location = new javax.swing.JTextField();
+        ContactNum = new javax.swing.JTextField();
+        ManagerId = new javax.swing.JTextField();
+        addTicket = new javax.swing.JButton();
+        EditTickets = new javax.swing.JButton();
+        searchTickets = new javax.swing.JButton();
+        DeleteTickets = new javax.swing.JButton();
+        textSearch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -60,7 +67,7 @@ public class BoxOffice extends javax.swing.JFrame {
                 "Id", "Event_id", "Location", "Contact_Number", "Manager_id"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableTickets);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,19 +127,39 @@ public class BoxOffice extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel5.setText("Contact number");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        EventId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                EventIdActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Add");
+        addTicket.setText("Add");
+        addTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTicketActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Edit Tickets");
+        EditTickets.setText("Edit Tickets");
+        EditTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditTicketsActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Watch");
+        searchTickets.setText("Search");
+        searchTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTicketsActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Delete");
+        DeleteTickets.setText("Delete");
+        DeleteTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteTicketsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,35 +177,37 @@ public class BoxOffice extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(back4)
                                 .addGap(74, 74, 74)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(addTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(EventId, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addGap(29, 29, 29))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, Short.MAX_VALUE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(78, 78, 78))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(EditTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(searchTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(textSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(DeleteTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,21 +216,22 @@ public class BoxOffice extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EventId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Location, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManagerId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(back4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EditTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DeleteTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(searchTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -238,9 +268,109 @@ public class BoxOffice extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_back4ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void EventIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_EventIdActionPerformed
+
+    private void addTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTicketActionPerformed
+        try {
+        int eventId = Integer.parseInt(EventId.getText());
+        String location = Location.getText();
+        String contactNum = ContactNum.getText();
+        int managerId = Integer.parseInt(ManagerId.getText());
+
+        if (location.isEmpty() || contactNum.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        TicketBoothController ticketBoothController = new TicketBoothController(this, tableTickets);
+        boolean success = ticketBoothController.createTicketBooth(eventId, location, contactNum, managerId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Taquilla creada exitosamente.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa números válidos para ID de evento y ID de gerente.");
+    }
+    }//GEN-LAST:event_addTicketActionPerformed
+
+    private void EditTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTicketsActionPerformed
+        try {
+        int ticketId = Integer.parseInt(textSearch.getText());
+        int eventId = Integer.parseInt(EventId.getText());
+        String location = Location.getText();
+        String contactNum = ContactNum.getText();
+        int managerId = Integer.parseInt(ManagerId.getText());
+
+        if (location.isEmpty() || contactNum.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        TicketBoothController ticketBoothController = new TicketBoothController(this, tableTickets);
+        TicketBooth ticketBooth = new TicketBooth(eventId, location, contactNum, managerId);
+
+        boolean success = ticketBoothController.updateTicketBooth(ticketId, ticketBooth);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Taquilla actualizada exitosamente.");
+            ticketBoothController.updateTable(); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar la taquilla.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa números válidos para ID de taquilla, ID de evento y ID de gerente.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_EditTicketsActionPerformed
+
+    private void searchTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTicketsActionPerformed
+        try {
+        int ticketId = Integer.parseInt(textSearch.getText());
+        TicketBoothController ticketBoothController = new TicketBoothController(this, tableTickets);
+        TicketBooth ticketBooth = ticketBoothController.searchTicketBooth(ticketId);
+
+        if (ticketBooth != null) {
+            EventId.setText(String.valueOf(ticketBooth.getEventId()));
+            Location.setText(ticketBooth.getLocation());
+            ContactNum.setText(ticketBooth.getContactNumber());
+            ManagerId.setText(String.valueOf(ticketBooth.getManagerId()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Taquilla no encontrada.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_searchTicketsActionPerformed
+
+    private void DeleteTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteTicketsActionPerformed
+        try {
+        int ticketId = Integer.parseInt(textSearch.getText());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar esta taquilla?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; 
+        }
+
+        TicketBoothController ticketBoothController = new TicketBoothController(this, tableTickets);
+        boolean success = ticketBoothController.deleteTicketBooth(ticketId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Taquilla eliminada exitosamente.");
+            ticketBoothController.updateTable(); 
+            EventId.setText("");
+            Location.setText("");
+            ContactNum.setText("");
+            ManagerId.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la taquilla.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_DeleteTicketsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,14 +408,14 @@ public class BoxOffice extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back1;
-    private javax.swing.JButton back2;
-    private javax.swing.JButton back3;
+    private javax.swing.JTextField ContactNum;
+    private javax.swing.JButton DeleteTickets;
+    private javax.swing.JButton EditTickets;
+    private javax.swing.JTextField EventId;
+    private javax.swing.JTextField Location;
+    private javax.swing.JTextField ManagerId;
+    private javax.swing.JButton addTicket;
     private javax.swing.JButton back4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,10 +425,8 @@ public class BoxOffice extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton searchTickets;
+    private javax.swing.JTable tableTickets;
+    private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 }
