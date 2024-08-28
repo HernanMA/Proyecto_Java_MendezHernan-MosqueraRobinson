@@ -10,11 +10,14 @@ package com.mycompany.controller;
  */
 import com.mycompany.model.Activity;
 import com.mycompany.model.ActivityDAO;
+import com.mycompany.model.CosplayScore;
+import com.mycompany.model.CosplayScoreDAO;
 import com.mycompany.util.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -94,6 +97,8 @@ public class ActivityController {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(activitiesView, "Error al actualizar la tabla: " + e.getMessage());
         }
-    }
 }
+
+}
+
 
