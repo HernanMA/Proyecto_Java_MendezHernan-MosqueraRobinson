@@ -207,12 +207,15 @@
                           <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="130" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="EditTickets" min="-2" pref="114" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="240" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="EditTickets" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="searchTickets" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -246,10 +249,10 @@
                   <EmptySpace pref="23" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="back4" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="addTicket" alignment="0" max="32767" attributes="0"/>
+                      <Component id="addTicket" alignment="0" pref="39" max="32767" attributes="0"/>
                       <Component id="EditTickets" alignment="0" max="32767" attributes="0"/>
                       <Component id="DeleteTickets" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textSearch" alignment="0" pref="39" max="32767" attributes="0"/>
+                      <Component id="textSearch" alignment="0" max="32767" attributes="0"/>
                       <Component id="searchTickets" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -317,6 +320,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="addTicket">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bradley Hand" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Add"/>
           </Properties>
           <Events>
@@ -325,6 +331,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="EditTickets">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bradley Hand" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Edit Tickets"/>
           </Properties>
           <Events>
@@ -333,6 +342,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="searchTickets">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bradley Hand" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
           <Events>
@@ -341,6 +353,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="DeleteTickets">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Bradley Hand" size="18" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
           <Events>
