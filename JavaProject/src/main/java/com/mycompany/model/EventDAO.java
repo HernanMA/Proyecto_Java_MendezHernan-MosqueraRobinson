@@ -104,6 +104,20 @@ public class EventDAO {
         return false;
     }
 }
+   
+   public boolean deleteEvent(int id) {
+    String sql = "DELETE FROM Events WHERE id=?";
+    try (Connection conn = conexion.conectar();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+        pstmt.setInt(1, id);
 
+        int rowsAffected = pstmt.executeUpdate();
+        return rowsAffected > 0;
+
+    } catch (SQLException e) {
+        System.err.println("Error al eliminar el evento: " + e.getMessage());
+        return false;
+    }
+}
 }

@@ -100,7 +100,6 @@ public class Events extends javax.swing.JFrame {
         createEvent = new javax.swing.JButton();
         deleteEvent = new javax.swing.JButton();
         editEvent = new javax.swing.JButton();
-        updateEvent = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -172,15 +171,6 @@ public class Events extends javax.swing.JFrame {
         editEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editEventActionPerformed(evt);
-            }
-        });
-
-        updateEvent.setBackground(new java.awt.Color(231, 231, 231));
-        updateEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        updateEvent.setText("Update Event");
-        updateEvent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateEventActionPerformed(evt);
             }
         });
 
@@ -256,7 +246,7 @@ public class Events extends javax.swing.JFrame {
                                 .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(150, 156, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -268,10 +258,9 @@ public class Events extends javax.swing.JFrame {
                                 .addComponent(editText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(111, 111, 111)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(createEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createEvent, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addComponent(editEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
@@ -283,9 +272,7 @@ public class Events extends javax.swing.JFrame {
                         .addComponent(back1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(createEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addComponent(jLabel1)
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -314,15 +301,14 @@ public class Events extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(editText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(createEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addContainerGap())))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(editEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(deleteEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(updateEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))))))
+                                .addGap(18, 86, Short.MAX_VALUE))))))
         );
 
         tableEvents.setFont(new java.awt.Font("Bradley Hand", 0, 14)); // NOI18N
@@ -472,12 +458,33 @@ public class Events extends javax.swing.JFrame {
     }//GEN-LAST:event_editEventActionPerformed
 
     private void deleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEventActionPerformed
-        
-    }//GEN-LAST:event_deleteEventActionPerformed
+        try {
+        int eventId = Integer.parseInt(editText.getText());
 
-    private void updateEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEventActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateEventActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este evento?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // Si el usuario cancela, no se realiza ninguna acción.
+        }
+
+        EventController eventController = new EventController(this);
+        boolean success = eventController.deleteEvent(eventId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
+            this.updateTable(); // Actualizar la tabla en tiempo real
+            // Limpiar los campos de texto después de la eliminación
+            eventNameText.setText("");
+            dateText.setText("");
+            organizerText.setText("");
+            AgeText.setText("");
+            statusText.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el evento.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_deleteEventActionPerformed
 
     private void editTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTextActionPerformed
         // TODO add your handling code here:
@@ -610,6 +617,5 @@ public class Events extends javax.swing.JFrame {
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField statusText;
     private javax.swing.JTable tableEvents;
-    private javax.swing.JButton updateEvent;
     // End of variables declaration//GEN-END:variables
 }

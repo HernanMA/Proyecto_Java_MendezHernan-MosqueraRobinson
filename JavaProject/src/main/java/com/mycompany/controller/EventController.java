@@ -57,4 +57,8 @@ public class EventController {
     return eventDAO.updateEvent(id, event);
 }
 
+    public boolean deleteEvent(int id) {
+    return eventDAO.deleteEvent(id);
+}
+
 }
