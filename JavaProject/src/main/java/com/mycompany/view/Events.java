@@ -5,6 +5,7 @@
 package com.mycompany.view;
 
 import com.mycompany.controller.EventController;
+import com.mycompany.model.Event;
 import com.mycompany.util.Conexion;
 import java.awt.BorderLayout;
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -104,6 +107,8 @@ public class Events extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         back1 = new javax.swing.JButton();
+        editText = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableEvents = new javax.swing.JTable();
@@ -203,6 +208,21 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
+        editText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTextActionPerformed(evt);
+            }
+        });
+
+        searchButton.setBackground(new java.awt.Color(231, 231, 231));
+        searchButton.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,13 +255,17 @@ public class Events extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(AgeText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(organizerText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dateText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(organizerText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)
+                                .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(29, 29, 29)
+                                .addComponent(editText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(111, 111, 111)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(createEvent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -287,7 +311,11 @@ public class Events extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(statusText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel6))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(editText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addContainerGap())))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(editEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
@@ -412,55 +440,68 @@ public class Events extends javax.swing.JFrame {
 
     private void editEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editEventActionPerformed
         try {
-        int eventId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del evento a editar:"));
+        int eventId = Integer.parseInt(editText.getText());
         String eventName = eventNameText.getText();
         String date = dateText.getText();
         int organizerId = Integer.parseInt(organizerText.getText());
         int ageClassificationId = Integer.parseInt(AgeText.getText());
         String status = statusText.getText();
 
-        // Validar campos vacíos
         if (eventName.isEmpty() || date.isEmpty() || status.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos requeridos.");
             return;
         }
 
-       
         EventController eventController = new EventController(this);
-        boolean success = eventController.createEvent(eventName, date, organizerId, ageClassificationId, status);
+        Event event = new Event(eventName, LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), organizerId, ageClassificationId, status);
 
-        // Mostrar mensaje de éxito o error
+        // Aquí debes pasar tanto el ID del evento como el objeto Event
+        boolean success = eventController.updateEvent(eventId, event);
+
         if (success) {
             JOptionPane.showMessageDialog(this, "Evento actualizado exitosamente.");
+            this.updateTable(); 
         } else {
             JOptionPane.showMessageDialog(this, "Error al actualizar el evento.");
         }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Por favor, ingresa un número válido para ID de organizador y clasificación por edad.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
     }
     }//GEN-LAST:event_editEventActionPerformed
 
     private void deleteEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEventActionPerformed
-        try {
-        int eventId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del evento a eliminar:"));
-
-        // Llamar al controlador para eliminar el evento
-        boolean success = new EventController(this).deleteEvent(eventId);
-
-        // Mostrar mensaje de éxito o error
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al eliminar el evento.");
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
-    }
+        
     }//GEN-LAST:event_deleteEventActionPerformed
 
     private void updateEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEventActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateEventActionPerformed
+
+    private void editTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editTextActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        try {
+        int eventId = Integer.parseInt(editText.getText());
+        EventController eventController = new EventController(this);
+        Event event = eventController.searchEvent(eventId);
+
+        if (event != null) {
+            eventNameText.setText(event.getName());
+            dateText.setText(event.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            organizerText.setText(String.valueOf(event.getOrganizerId()));
+            AgeText.setText(String.valueOf(event.getAgeClassificationId()));
+            statusText.setText(event.getStatus());
+        } else {
+            JOptionPane.showMessageDialog(this, "Evento no encontrado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Name", "Date/Time", "Organizer ID", "Age Classification ID", "Status"}, 0);
 
@@ -554,6 +595,7 @@ public class Events extends javax.swing.JFrame {
     private javax.swing.JTextField dateText;
     private javax.swing.JButton deleteEvent;
     private javax.swing.JButton editEvent;
+    private javax.swing.JTextField editText;
     private javax.swing.JTextField eventNameText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -565,6 +607,7 @@ public class Events extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField organizerText;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTextField statusText;
     private javax.swing.JTable tableEvents;
     private javax.swing.JButton updateEvent;
