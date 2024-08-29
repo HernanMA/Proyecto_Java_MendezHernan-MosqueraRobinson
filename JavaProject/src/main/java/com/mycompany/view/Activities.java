@@ -10,6 +10,7 @@ import com.mycompany.model.Activity;
 import com.mycompany.model.CosplayScore;
 import com.mycompany.model.CosplayScoreController;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -548,17 +549,38 @@ public class Activities extends javax.swing.JFrame {
 
     private void EditCosplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCosplayActionPerformed
         try {
-            int scoreId = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID a actualizar:"));
-            int participantId = Integer.parseInt(ParticipantId.getText());
-            int judgeId = Integer.parseInt(JudgeId.getText());
-            double score = Double.parseDouble(ScoreCosplay.getText());
+        // Solicitar ID del puntaje a editar
+        int scoreId = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID del puntaje a actualizar:"));
+        int participantId = Integer.parseInt(ParticipantId.getText());
+        
+        // Solicitar los puntajes de dos jueces
+        int judgeId1 = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID del primer juez:"));
+        double score1 = Double.parseDouble(JOptionPane.showInputDialog(this, "Ingresa el puntaje del primer juez:"));
+        
+        int judgeId2 = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingresa el ID del segundo juez:"));
+        double score2 = Double.parseDouble(JOptionPane.showInputDialog(this, "Ingresa el puntaje del segundo juez:"));
+        
+        // Calcular el promedio de los puntajes
+        double averageScore = (score1 + score2) / 2.0;
 
-            CosplayScoreController cosplayScoreController = new CosplayScoreController(this, CosplayTable);
-            cosplayScoreController.updateCosplayScore(scoreId, participantId, judgeId, score);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+        // Actualizar el puntaje promedio en la base de datos
+        CosplayScoreController cosplayScoreController = new CosplayScoreController(this, CosplayTable);
+        cosplayScoreController.updateCosplayScore(scoreId, participantId, judgeId1, averageScore);
+        
+        // Actualizar la tabla con el nuevo puntaje promedio
+        DefaultTableModel model = (DefaultTableModel) CosplayTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (Integer.parseInt(model.getValueAt(i, 0).toString()) == scoreId) {
+                model.setValueAt(averageScore, i, 3); // Suponiendo que el puntaje se muestra en la cuarta columna
+                break;
+            }
         }
+
+        JOptionPane.showMessageDialog(this, "Puntaje actualizado exitosamente.");
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+    }
     }//GEN-LAST:event_EditCosplayActionPerformed
 
     private CosplayScoreController cosplayScoreController;
