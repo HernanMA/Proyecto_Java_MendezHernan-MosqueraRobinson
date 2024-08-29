@@ -21,8 +21,10 @@ public class Tickets extends javax.swing.JFrame {
     public Tickets() {
         initComponents();
         setLocationRelativeTo(null); 
-        TicketController ticketController = new TicketController(this, TableTickets);
+        TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
         ticketController.updateTable();
+        
+
     }
 
     /**
@@ -42,6 +44,10 @@ public class Tickets extends javax.swing.JFrame {
         StatusOptions = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        totalsumText = new javax.swing.JTextField();
+        TotalCollectText = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,6 +104,12 @@ public class Tickets extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel12.setText("Status");
 
+        jLabel13.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel13.setText("Total Sum:");
+
+        jLabel14.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel14.setText("Total collected");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +132,19 @@ public class Tickets extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(347, 347, 347)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalsumText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TotalCollectText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,11 +156,22 @@ public class Tickets extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(totalsumText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(StatusOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StatusOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel14)
+                                .addComponent(TotalCollectText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -342,7 +377,7 @@ public class Tickets extends javax.swing.JFrame {
                 return;
             }
 
-            TicketController ticketController = new TicketController(this, TableTickets);
+            TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
             boolean success = ticketController.createTicket(ticketName, price, ageClassification, additionalCost, statusId, ticketBooth, customer);
 
             if (success) {
@@ -369,7 +404,7 @@ public class Tickets extends javax.swing.JFrame {
                 return;
             }
 
-            TicketController ticketController = new TicketController(this, TableTickets);
+            TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
             Ticket ticket = new Ticket(ticketName, price, ageClassification, additionalCost, statusId, ticketBooth, customer);
 
             boolean success = ticketController.updateTicket(ticketId, ticket);
@@ -396,7 +431,7 @@ public class Tickets extends javax.swing.JFrame {
                 return;
             }
 
-            TicketController ticketController = new TicketController(this, TableTickets);
+            TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
             boolean success = ticketController.deleteTicket(ticketId);
 
             if (success) {
@@ -420,7 +455,7 @@ public class Tickets extends javax.swing.JFrame {
     private void SearchTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTicketActionPerformed
         try {
             int ticketId = Integer.parseInt(searchTicket.getText());
-            TicketController ticketController = new TicketController(this, TableTickets);
+            TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
             Ticket ticket = ticketController.searchTicket(ticketId);
 
             if (ticket != null) {
@@ -441,13 +476,14 @@ public class Tickets extends javax.swing.JFrame {
 
     private void StatusOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusOptionsActionPerformed
         String selectedStatus = StatusOptions.getSelectedItem().toString();
+
+    TicketController ticketController = new TicketController(TableTickets, TotalCollectText, totalsumText);
     
-    TicketController ticketController = new TicketController(this, TableTickets);
-    
+    String statusInDB = "";
     if (selectedStatus.equals("Everything")) {
-        ticketController.updateTable();
+        ticketController.updateTable(); // Cargar todos los datos sin filtro
+        ticketController.calculateSums(""); // Calcular la suma sin filtro
     } else {
-        String statusInDB = "";
         switch (selectedStatus) {
             case "Paid":
                 statusInDB = "PAID";
@@ -462,7 +498,8 @@ public class Tickets extends javax.swing.JFrame {
                 statusInDB = "";
         }
 
-        ticketController.filterTicketsByStatus(statusInDB);
+        ticketController.filterTicketsByStatus(statusInDB); // Filtrar los datos
+        ticketController.calculateSums(statusInDB); // Calcular la suma con el filtro
     }
     }//GEN-LAST:event_StatusOptionsActionPerformed
 
@@ -514,11 +551,14 @@ public class Tickets extends javax.swing.JFrame {
     private javax.swing.JTextField StatusTickets;
     private javax.swing.JTable TableTickets;
     private javax.swing.JTextField Ticket_Id;
+    private javax.swing.JTextField TotalCollectText;
     private javax.swing.JButton UpdateTicket;
     private javax.swing.JButton back4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -531,5 +571,6 @@ public class Tickets extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField searchTicket;
+    private javax.swing.JTextField totalsumText;
     // End of variables declaration//GEN-END:variables
 }
