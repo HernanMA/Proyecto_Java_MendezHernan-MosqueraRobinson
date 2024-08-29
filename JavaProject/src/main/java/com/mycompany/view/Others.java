@@ -27,10 +27,16 @@ public class Others extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         VisitorsButton = new javax.swing.JButton();
         back5 = new javax.swing.JButton();
+        VisitorsButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        VisitorsButton2 = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,25 +57,59 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        VisitorsButton1.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        VisitorsButton1.setText("Stadistics");
+        VisitorsButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisitorsButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
+        jLabel2.setText("OTHERS");
+
+        VisitorsButton2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        VisitorsButton2.setText("Prizes");
+        VisitorsButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisitorsButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(538, Short.MAX_VALUE)
-                .addComponent(VisitorsButton)
-                .addGap(89, 89, 89))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(back5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(261, 261, 261)
+                        .addComponent(jLabel2)))
+                .addContainerGap(274, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(VisitorsButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VisitorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(VisitorsButton1)
+                .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(VisitorsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VisitorsButton)
+                    .addComponent(VisitorsButton1))
+                .addGap(85, 85, 85)
+                .addComponent(VisitorsButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(back5)
                 .addContainerGap())
         );
@@ -121,6 +161,14 @@ public class Others extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_back5ActionPerformed
 
+    private void VisitorsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VisitorsButton1ActionPerformed
+
+    private void VisitorsButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VisitorsButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,7 +206,11 @@ public class Others extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton VisitorsButton;
+    private javax.swing.JButton VisitorsButton1;
+    private javax.swing.JButton VisitorsButton2;
     private javax.swing.JButton back5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
