@@ -56,6 +56,7 @@ public class Staff extends javax.swing.JFrame {
         textSearch = new javax.swing.JTextField();
         SearchEmployee = new javax.swing.JButton();
         Create = new javax.swing.JButton();
+        back5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +163,15 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
+        back5.setBackground(new java.awt.Color(234, 230, 230));
+        back5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        back5.setText("Back");
+        back5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -188,7 +198,9 @@ public class Staff extends javax.swing.JFrame {
                             .addComponent(StatusID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(BirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131)
+                        .addGap(27, 27, 27)
+                        .addComponent(back5)
+                        .addGap(32, 32, 32)
                         .addComponent(SearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -230,7 +242,8 @@ public class Staff extends javax.swing.JFrame {
                                 .addGap(16, 16, 16))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(SearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(SearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(back5))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,6 +402,12 @@ public class Staff extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_CreateActionPerformed
 
+    private void back5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back5ActionPerformed
+        Software soft = new Software();
+        soft.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -435,6 +454,7 @@ public class Staff extends javax.swing.JFrame {
     private javax.swing.JTextField StatusID;
     private javax.swing.JButton UpdateEmployee;
     private javax.swing.JButton back4;
+    private javax.swing.JButton back5;
     private javax.swing.JTextField identification;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

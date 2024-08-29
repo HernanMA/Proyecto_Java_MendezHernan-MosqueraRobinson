@@ -117,7 +117,7 @@
                   <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                   <Component id="shops" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="management" min="-2" max="-2" attributes="0"/>
+                  <Component id="Others" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -167,7 +167,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="shops" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="management" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Others" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
@@ -331,7 +331,7 @@
             <Property name="text" type="java.lang.String" value="Other sistem implementations"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="management">
+        <Component class="javax.swing.JButton" name="Others">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bradley Hand" size="24" style="0"/>
@@ -339,7 +339,7 @@
             <Property name="text" type="java.lang.String" value="Others"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="managementActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OthersActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="back">

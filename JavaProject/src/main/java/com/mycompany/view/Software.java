@@ -43,7 +43,7 @@ public class Software extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         ticket = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        management = new javax.swing.JButton();
+        Others = new javax.swing.JButton();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,11 +131,11 @@ public class Software extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel9.setText("Other sistem implementations");
 
-        management.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        management.setText("Others");
-        management.addActionListener(new java.awt.event.ActionListener() {
+        Others.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        Others.setText("Others");
+        Others.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managementActionPerformed(evt);
+                OthersActionPerformed(evt);
             }
         });
 
@@ -208,7 +208,7 @@ public class Software extends javax.swing.JFrame {
                 .addGap(113, 113, 113)
                 .addComponent(shops, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(management)
+                .addComponent(Others)
                 .addGap(205, 205, 205))
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,7 +249,7 @@ public class Software extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(shops)
-                            .addComponent(management))
+                            .addComponent(Others))
                         .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -319,11 +319,11 @@ public class Software extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ticketActionPerformed
 
-    private void managementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managementActionPerformed
+    private void OthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OthersActionPerformed
         Others other = new Others();
         other.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_managementActionPerformed
+    }//GEN-LAST:event_OthersActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         Welcome welcome = new Welcome();
@@ -367,6 +367,7 @@ public class Software extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Others;
     private javax.swing.JButton activity;
     private javax.swing.JButton back;
     private javax.swing.JButton box;
@@ -382,7 +383,6 @@ public class Software extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton management;
     private javax.swing.JButton shops;
     private javax.swing.JButton staff;
     private javax.swing.JButton ticket;
