@@ -16,6 +16,7 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,12 +27,19 @@ public class TicketController {
     private TicketDAO ticketDAO;
     private JTable ticketsTable;
     private JFrame ticketsView;
+    private JTextField TotalCollectText;
+    private JTextField totalsumText;
+    private JTable tableTickets;
 
-    public TicketController(JFrame ticketsView, JTable ticketsTable) {
+    public TicketController(JTable ticketsTable, JTextField TotalCollectText, JTextField totalsumText) {
         this.ticketDAO = new TicketDAO();
         this.ticketsView = ticketsView;
         this.ticketsTable = ticketsTable;
+        this.TotalCollectText = TotalCollectText;
+        this.totalsumText = totalsumText;
+        this.tableTickets = tableTickets;
     }
+    
 
     public boolean createTicket(String name, BigDecimal price, Integer age_classification_id, BigDecimal additional_cost, Integer status_id, Integer ticket_booth_id, Integer customer_id) {
         try {
@@ -144,8 +152,40 @@ public class TicketController {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(ticketsView, "Error al cerrar los recursos: " + e.getMessage());
         }
+    }   
+}
+    public void calculateSums(String status) {
+    String sql = "SELECT SUM(price + additional_cost) AS total_collect, COUNT(*) AS total_tickets FROM Tickets";
+    
+    // Si se aplica un filtro por estado, agrega la cláusula WHERE
+    if (!status.isEmpty()) {
+        sql += " WHERE status_id = (SELECT id FROM TicketStatuses WHERE status = ?)";
+    }
+
+    try (Connection conn = Conexion.getInstance().conectar();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+        // Si hay un filtro, establece el parámetro en la consulta
+        if (!status.isEmpty()) {
+            pstmt.setString(1, status);
+        }
+
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            // Obtener la suma total y el número de tickets
+            BigDecimal totalCollect = rs.getBigDecimal("total_collect");
+            int totalTickets = rs.getInt("total_tickets");
+
+            // Actualiza los campos de texto con los resultados
+            TotalCollectText.setText(totalCollect != null ? totalCollect.toString() : "0");
+            totalsumText.setText(String.valueOf(totalTickets)); // Muestra el total de tickets
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al calcular las sumas: " + e.getMessage());
     }
 }
+
 
 }
 
