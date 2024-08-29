@@ -35,6 +35,7 @@ public class Others extends javax.swing.JFrame {
         VisitorsButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         VisitorsButton2 = new javax.swing.JButton();
+        VisitorsButton3 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -76,6 +77,14 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        VisitorsButton3.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        VisitorsButton3.setText("Commerce");
+        VisitorsButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VisitorsButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -95,7 +104,9 @@ public class Others extends javax.swing.JFrame {
                     .addComponent(VisitorsButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(VisitorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(VisitorsButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VisitorsButton1)
+                    .addComponent(VisitorsButton3))
                 .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
@@ -108,7 +119,9 @@ public class Others extends javax.swing.JFrame {
                     .addComponent(VisitorsButton)
                     .addComponent(VisitorsButton1))
                 .addGap(85, 85, 85)
-                .addComponent(VisitorsButton2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VisitorsButton2)
+                    .addComponent(VisitorsButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(back5)
                 .addContainerGap())
@@ -169,6 +182,12 @@ public class Others extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_VisitorsButton2ActionPerformed
 
+    private void VisitorsButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton3ActionPerformed
+        Commerce comm = new Commerce();
+        comm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VisitorsButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +227,7 @@ public class Others extends javax.swing.JFrame {
     private javax.swing.JButton VisitorsButton;
     private javax.swing.JButton VisitorsButton1;
     private javax.swing.JButton VisitorsButton2;
+    private javax.swing.JButton VisitorsButton3;
     private javax.swing.JButton back5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

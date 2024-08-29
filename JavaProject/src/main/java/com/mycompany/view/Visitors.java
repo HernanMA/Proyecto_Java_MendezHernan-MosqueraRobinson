@@ -57,6 +57,7 @@ public class Visitors extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Visitors = new javax.swing.JTable();
         jComboBoxGender = new javax.swing.JComboBox<>();
+        back = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,12 +141,23 @@ public class Visitors extends javax.swing.JFrame {
         jComboBoxGender.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jComboBoxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
+        back.setBackground(new java.awt.Color(234, 230, 230));
+        back.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(285, 285, 285)
+                .addContainerGap()
+                .addComponent(back)
+                .addGap(207, 207, 207)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -199,7 +211,9 @@ public class Visitors extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(back))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -357,6 +371,12 @@ public class Visitors extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_SearchvisitorActionPerformed
 
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        Welcome welcome = new Welcome();
+        welcome.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,6 +424,7 @@ public class Visitors extends javax.swing.JFrame {
     private javax.swing.JTextField SearchVisitor;
     private javax.swing.JButton Searchvisitor;
     private javax.swing.JTable Visitors;
+    private javax.swing.JButton back;
     private javax.swing.JComboBox<String> jComboBoxGender;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
