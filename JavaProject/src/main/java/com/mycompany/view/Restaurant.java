@@ -29,6 +29,12 @@ public class Restaurant extends javax.swing.JFrame {
 
         dishController.loadDishesData((DefaultTableModel) DishesRestaurant.getModel());
         dishController.loadDishIngredientsData((DefaultTableModel) ingredientsRestaurant.getModel());
+
+        buyDish.addActionListener(e -> {
+            int dishId = Integer.parseInt(idplatillo.getText());
+            dishController.buyDish(dishId);
+            dishController.loadDishIngredientsData((DefaultTableModel) ingredientsRestaurant.getModel());
+        });
     }
 
     /**
@@ -48,6 +54,7 @@ public class Restaurant extends javax.swing.JFrame {
         buyDish = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         DishesRestaurant = new javax.swing.JTable();
+        back6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ingredientsRestaurant = new javax.swing.JTable();
@@ -76,10 +83,19 @@ public class Restaurant extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+                "id", "restaurant_id", "name", "price", "type_id", "preparation_time"
             }
         ));
         jScrollPane1.setViewportView(DishesRestaurant);
+
+        back6.setBackground(new java.awt.Color(234, 230, 230));
+        back6.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        back6.setText("Back");
+        back6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,19 +111,24 @@ public class Restaurant extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(289, 289, 289))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addGap(203, 203, 203)
+                        .addComponent(back6))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -132,7 +153,7 @@ public class Restaurant extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "dish_id", "ingredient_id", "quantity_required"
             }
         ));
         jScrollPane2.setViewportView(ingredientsRestaurant);
@@ -192,8 +213,15 @@ public class Restaurant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buyDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyDishActionPerformed
-       
+        int dishId = Integer.parseInt(idplatillo.getText());
+        dishController.buyDish(dishId);
     }//GEN-LAST:event_buyDishActionPerformed
+
+    private void back6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back6ActionPerformed
+        Software soft = new Software();
+        soft.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,6 +260,9 @@ public class Restaurant extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DishesRestaurant;
+    private javax.swing.JButton back4;
+    private javax.swing.JButton back5;
+    private javax.swing.JButton back6;
     private javax.swing.JButton buyDish;
     private javax.swing.JTextField idplatillo;
     private javax.swing.JTable ingredientsRestaurant;
