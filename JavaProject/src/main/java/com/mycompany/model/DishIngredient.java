@@ -9,38 +9,39 @@ package com.mycompany.model;
  * @author hernan
  */
 public class DishIngredient {
-    private int dishId;
-    private int ingredientId;
-    private int quantityRequired;
+    private int id;
+    private String name;
+    private int availableQuantity;
 
-    // Constructor, getters, y setters
-    public DishIngredient(int dishId, int ingredientId, int quantityRequired) {
-        this.dishId = dishId;
-        this.ingredientId = ingredientId;
-        this.quantityRequired = quantityRequired;
+    // Constructor
+    public DishIngredient(int id, String name, int availableQuantity) {
+        this.id = id;
+        this.name = name;
+        this.availableQuantity = availableQuantity;
     }
 
-    public int getDishId() {
-        return dishId;
+    // Getters y setters
+    public int getId() {
+        return id;
     }
 
-    public void setDishId(int dishId) {
-        this.dishId = dishId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getIngredientId() {
-        return ingredientId;
+    public String getName() {
+        return name;
     }
 
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getQuantityRequired() {
-        return quantityRequired;
+    public int getAvailableQuantity() {
+        return availableQuantity;
     }
 
-    public void setQuantityRequired(int quantityRequired) {
-        this.quantityRequired = quantityRequired;
+    public void setAvailableQuantity(int availableQuantity) {
+        this.availableQuantity = availableQuantity;
     }
 }

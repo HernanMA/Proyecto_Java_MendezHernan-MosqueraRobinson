@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.util.Conexion;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -46,7 +47,7 @@ public class DishDAO {
 
     public List<DishIngredient> getAllDishIngredients() {
         List<DishIngredient> ingredients = new ArrayList<>();
-        String query = "SELECT dish_id, ingredient_id, quantity_required FROM DishIngredients";
+        String query = "SELECT id, name, available_quantity FROM Ingredients";
 
         try (Connection con = Conexion.getInstance().conectar();
              Statement stmt = con.createStatement();
@@ -54,9 +55,9 @@ public class DishDAO {
 
             while (rs.next()) {
                 DishIngredient ingredient = new DishIngredient(
-                    rs.getInt("dish_id"),
-                    rs.getInt("ingredient_id"),
-                    rs.getInt("quantity_required")
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("available_quantity")
                 );
                 ingredients.add(ingredient);
             }
@@ -65,4 +66,39 @@ public class DishDAO {
         }
         return ingredients;
     }
+    
+    public void buyDish(int dishId) throws SQLException {
+    String getIngredientsQuery = "SELECT ingredient_id, quantity_required FROM DishIngredients WHERE dish_id = ?";
+    String updateIngredientsQuery = "UPDATE Ingredients SET available_quantity = available_quantity - ? WHERE id = ?";
+
+    try (Connection con = Conexion.getInstance().conectar();
+         PreparedStatement getIngredientsStmt = con.prepareStatement(getIngredientsQuery);
+         PreparedStatement updateIngredientsStmt = con.prepareStatement(updateIngredientsQuery)) {
+
+        getIngredientsStmt.setInt(1, dishId);
+
+        try (ResultSet rs = getIngredientsStmt.executeQuery()) {
+            while (rs.next()) {
+                int ingredientId = rs.getInt("ingredient_id");
+                int quantityRequired = rs.getInt("quantity_required");
+
+                System.out.println("Restando " + quantityRequired + " unidades del ingrediente con ID " + ingredientId);
+
+                updateIngredientsStmt.setInt(1, quantityRequired);
+                updateIngredientsStmt.setInt(2, ingredientId);
+                
+                int affectedRows = updateIngredientsStmt.executeUpdate();
+                
+                if (affectedRows > 0) {
+                    System.out.println("Se actualizó la cantidad del ingrediente con ID " + ingredientId);
+                } else {
+                    System.err.println("No se pudo actualizar la cantidad del ingrediente con ID " + ingredientId);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        throw new SQLException("Error al realizar la compra", e);
+    }
+}
+
 }
