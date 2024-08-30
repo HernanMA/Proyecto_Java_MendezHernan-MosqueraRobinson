@@ -7,6 +7,7 @@ package com.mycompany.controller;
 import com.mycompany.model.Dish;
 import com.mycompany.model.DishDAO;
 import com.mycompany.model.DishIngredient;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,16 +38,28 @@ public class DishController {
         }
     }
 
+    // Método para cargar los datos de los ingredientes
     public void loadDishIngredientsData(DefaultTableModel tableModel) {
         List<DishIngredient> ingredients = dishDAO.getAllDishIngredients();
         tableModel.setRowCount(0);
 
         for (DishIngredient ingredient : ingredients) {
             tableModel.addRow(new Object[]{
-                ingredient.getDishId(),
-                ingredient.getIngredientId(),
-                ingredient.getQuantityRequired()
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getAvailableQuantity()
             });
+        }
+    }
+
+    // Método para procesar la compra de un platillo
+    public void buyDish(int dishId) {
+        try {
+            dishDAO.buyDish(dishId);
+            System.out.println("Compra realizada con éxito.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al realizar la compra: " + e.getMessage());
         }
     }
 }
