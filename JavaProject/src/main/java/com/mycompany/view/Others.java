@@ -37,6 +37,8 @@ public class Others extends javax.swing.JFrame {
         VisitorsButton2 = new javax.swing.JButton();
         VisitorsButton3 = new javax.swing.JButton();
         Orders = new javax.swing.JButton();
+        RestaurantsButton = new javax.swing.JButton();
+        Discounts = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -94,6 +96,22 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        RestaurantsButton.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        RestaurantsButton.setText("Restaurants");
+        RestaurantsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RestaurantsButtonActionPerformed(evt);
+            }
+        });
+
+        Discounts.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        Discounts.setText("Discounts");
+        Discounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiscountsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -108,15 +126,24 @@ public class Others extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addContainerGap(274, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(VisitorsButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(VisitorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(VisitorsButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(VisitorsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(RestaurantsButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(VisitorsButton1)
                     .addComponent(VisitorsButton3)
-                    .addComponent(Orders))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Discounts)
+                            .addComponent(Orders))))
                 .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
@@ -124,17 +151,25 @@ public class Others extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VisitorsButton)
-                    .addComponent(VisitorsButton1))
-                .addGap(85, 85, 85)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VisitorsButton2)
-                    .addComponent(VisitorsButton3))
-                .addGap(85, 85, 85)
-                .addComponent(Orders)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(VisitorsButton)
+                            .addComponent(VisitorsButton1))
+                        .addGap(85, 85, 85)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(VisitorsButton2)
+                            .addComponent(VisitorsButton3))
+                        .addGap(85, 85, 85)
+                        .addComponent(RestaurantsButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Orders)
+                        .addGap(34, 34, 34)))
+                .addComponent(Discounts)
+                .addGap(17, 17, 17)
                 .addComponent(back5)
                 .addContainerGap())
         );
@@ -206,6 +241,18 @@ public class Others extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_OrdersActionPerformed
 
+    private void RestaurantsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestaurantsButtonActionPerformed
+        Restaurant rest = new Restaurant();
+        rest.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_RestaurantsButtonActionPerformed
+
+    private void DiscountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiscountsActionPerformed
+        Discounts disc = new Discounts();
+        disc.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_DiscountsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,7 +289,9 @@ public class Others extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Discounts;
     private javax.swing.JButton Orders;
+    private javax.swing.JButton RestaurantsButton;
     private javax.swing.JButton VisitorsButton;
     private javax.swing.JButton VisitorsButton1;
     private javax.swing.JButton VisitorsButton2;
