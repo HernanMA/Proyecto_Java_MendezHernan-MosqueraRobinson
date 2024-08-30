@@ -37,6 +37,7 @@ public class Shops extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ShopTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        back5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -73,23 +74,39 @@ public class Shops extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("SHOPS AND RESTAURANTS");
 
+        back5.setBackground(new java.awt.Color(234, 230, 230));
+        back5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        back5.setText("Back");
+        back5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(back5)
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1)
+                        .addGap(0, 186, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -367,6 +384,12 @@ public class Shops extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_SearchShopsActionPerformed
 
+    private void back5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back5ActionPerformed
+        Software soft = new Software();
+        soft.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,6 +436,7 @@ public class Shops extends javax.swing.JFrame {
     private javax.swing.JButton UpdateShops;
     private javax.swing.JButton addShops;
     private javax.swing.JButton back4;
+    private javax.swing.JButton back5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
