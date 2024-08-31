@@ -193,7 +193,7 @@ private CashRegisterController cashRegisterController;
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Status", "Operator Id", "Opening A mount", "Closing Amount"
             }
         ));
         jScrollPane1.setViewportView(CommerceTable);

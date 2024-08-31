@@ -4,18 +4,30 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.DiscountController;
+import com.mycompany.model.Discount;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hernan
  */
 public class Discounts extends javax.swing.JFrame {
-
+private DiscountController discountController;
     /**
      * Creates new form Discounts
      */
     public Discounts() {
         initComponents();
         setLocationRelativeTo(null); 
+         // Inicializa el controlador
+        discountController = new DiscountController(this, TableDiscounts);
+        // Verifica que el controlador esté inicializado correctamente
+        System.out.println("discountController inicializado: " + (discountController != null));
+        // Actualiza la tabla para mostrar los datos actuales
+        discountController.updateTable();
     }
 
     /**
@@ -36,18 +48,22 @@ public class Discounts extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        visitorId = new javax.swing.JTextField();
-        visitorId1 = new javax.swing.JTextField();
-        visitorId2 = new javax.swing.JTextField();
-        visitorId3 = new javax.swing.JTextField();
-        visitorId4 = new javax.swing.JTextField();
-        visitorId5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        IdShop = new javax.swing.JTextField();
+        EventId = new javax.swing.JTextField();
+        StartDate = new javax.swing.JTextField();
+        ProductId = new javax.swing.JTextField();
+        DiscountValue = new javax.swing.JTextField();
+        EndDate = new javax.swing.JTextField();
+        ComboBoxDiscountType = new javax.swing.JComboBox<>();
+        AddDiscount = new javax.swing.JButton();
+        EditDiscount = new javax.swing.JButton();
         backk = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        SearchDiscountButton = new javax.swing.JButton();
+        DeleteDiscount = new javax.swing.JButton();
+        SearchDiscount = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableDiscounts = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,14 +91,24 @@ public class Discounts extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel9.setText("Event Id");
 
-        jComboBox1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxDiscountType.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        ComboBoxDiscountType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PERCENTAGE", "FIXED_AMOUNT", "BUNDLE" }));
 
-        jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton1.setText("Add Discount");
+        AddDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        AddDiscount.setText("Add Discount");
+        AddDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddDiscountActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton2.setText("Edit Discount");
+        EditDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        EditDiscount.setText("Edit Discount");
+        EditDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditDiscountActionPerformed(evt);
+            }
+        });
 
         backk.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         backk.setText("Back");
@@ -92,11 +118,21 @@ public class Discounts extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton4.setText("jButton1");
+        SearchDiscountButton.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        SearchDiscountButton.setText("Search");
+        SearchDiscountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchDiscountButtonActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        jButton5.setText("Delete Discount");
+        DeleteDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        DeleteDiscount.setText("Delete Discount");
+        DeleteDiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteDiscountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,47 +144,55 @@ public class Discounts extends javax.swing.JFrame {
                         .addGap(306, 306, 306)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(AddDiscount)))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(visitorId4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(visitorId3, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                .addGap(95, 95, 95)
+                                .addComponent(DeleteDiscount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(EditDiscount))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(DiscountValue, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ComboBoxDiscountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel9))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(visitorId, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                                .addGap(76, 76, 76)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(IdShop)
+                                        .addGap(76, 76, 76))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(SearchDiscountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(visitorId2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(visitorId1)
-                    .addComponent(visitorId5))
+                    .addComponent(StartDate)
+                    .addComponent(EventId)
+                    .addComponent(EndDate)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 15, Short.MAX_VALUE)
+                        .addComponent(backk))
+                    .addComponent(SearchDiscount))
                 .addGap(53, 53, 53))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26)
-                .addComponent(jButton5)
-                .addGap(24, 24, 24)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backk)
-                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,53 +203,92 @@ public class Discounts extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
-                    .addComponent(visitorId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(visitorId2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel8)
-                            .addComponent(visitorId5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1)))
-                .addGap(31, 31, 31)
+                    .addComponent(IdShop, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
+                    .addComponent(EndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(visitorId3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(visitorId1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(EventId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboBoxDiscountType, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(visitorId4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                    .addComponent(DiscountValue, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchDiscountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backk, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        TableDiscounts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Id Shop", "Product Id", "Discounts Type", "Discount Value", "Start Date", "End Date", "Event Id"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TableDiscounts);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(209, 209, 209))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,6 +299,76 @@ public class Discounts extends javax.swing.JFrame {
         other.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backkActionPerformed
+
+    private void SearchDiscountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchDiscountButtonActionPerformed
+        try {
+        int discountId = Integer.parseInt(SearchDiscount.getText());
+        Discount discount = discountController.searchDiscount(discountId);
+
+        if (discount != null) {
+            IdShop.setText(String.valueOf(discount.getShopId()));
+            ProductId.setText(String.valueOf(discount.getProductId()));
+            ComboBoxDiscountType.setSelectedItem(discount.getDiscountType());
+            DiscountValue.setText(String.valueOf(discount.getDiscountValue()));
+            StartDate.setText(discount.getStartDate().toString());
+            EndDate.setText(discount.getEndDate().toString());
+            EventId.setText(String.valueOf(discount.getEventId()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Descuento no encontrado.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_SearchDiscountButtonActionPerformed
+
+    private void AddDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDiscountActionPerformed
+        try {
+        int shopId = Integer.parseInt(IdShop.getText());
+        int productId = Integer.parseInt(ProductId.getText());
+        String discountType = ComboBoxDiscountType.getSelectedItem().toString();
+        double discountValue = Double.parseDouble(DiscountValue.getText());
+        LocalDateTime startDate = LocalDateTime.parse(StartDate.getText());
+        LocalDateTime endDate = LocalDateTime.parse(EndDate.getText());
+        int eventId = Integer.parseInt(EventId.getText());
+
+        discountController.createDiscount(shopId, productId, discountType, discountValue, startDate, endDate, eventId);
+    } catch (NumberFormatException | DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+    }
+    }//GEN-LAST:event_AddDiscountActionPerformed
+
+    private void DeleteDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteDiscountActionPerformed
+        try {
+        int discountId = Integer.parseInt(SearchDiscount.getText());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este descuento?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        discountController.deleteDiscount(discountId);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+    }
+    }//GEN-LAST:event_DeleteDiscountActionPerformed
+
+    private void EditDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditDiscountActionPerformed
+        try {
+        int discountId = Integer.parseInt(SearchDiscount.getText());
+        int shopId = Integer.parseInt(IdShop.getText());
+        int productId = Integer.parseInt(ProductId.getText());
+        String discountType = ComboBoxDiscountType.getSelectedItem().toString();
+        double discountValue = Double.parseDouble(DiscountValue.getText());
+        LocalDateTime startDate = LocalDateTime.parse(StartDate.getText());
+        LocalDateTime endDate = LocalDateTime.parse(EndDate.getText());
+        int eventId = Integer.parseInt(EventId.getText());
+
+        Discount discount = new Discount(shopId, productId, discountType, discountValue, startDate, endDate, eventId);
+        discountController.updateDiscount(discountId, discount);
+    } catch (NumberFormatException | DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+    }
+    }//GEN-LAST:event_EditDiscountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,12 +406,20 @@ public class Discounts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddDiscount;
+    private javax.swing.JComboBox<String> ComboBoxDiscountType;
+    private javax.swing.JButton DeleteDiscount;
+    private javax.swing.JTextField DiscountValue;
+    private javax.swing.JButton EditDiscount;
+    private javax.swing.JTextField EndDate;
+    private javax.swing.JTextField EventId;
+    private javax.swing.JTextField IdShop;
+    private javax.swing.JTextField ProductId;
+    private javax.swing.JTextField SearchDiscount;
+    private javax.swing.JButton SearchDiscountButton;
+    private javax.swing.JTextField StartDate;
+    private javax.swing.JTable TableDiscounts;
     private javax.swing.JButton backk;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -268,11 +429,7 @@ public class Discounts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField visitorId;
-    private javax.swing.JTextField visitorId1;
-    private javax.swing.JTextField visitorId2;
-    private javax.swing.JTextField visitorId3;
-    private javax.swing.JTextField visitorId4;
-    private javax.swing.JTextField visitorId5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
