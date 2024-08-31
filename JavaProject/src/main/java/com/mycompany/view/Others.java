@@ -357,7 +357,9 @@ public class Others extends javax.swing.JFrame {
     }//GEN-LAST:event_VisitorsButton1ActionPerformed
 
     private void VisitorsButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton2ActionPerformed
-        // TODO add your handling code here:
+        Prizes prize = new Prizes();
+        prize.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VisitorsButton2ActionPerformed
 
     private void VisitorsButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton3ActionPerformed
