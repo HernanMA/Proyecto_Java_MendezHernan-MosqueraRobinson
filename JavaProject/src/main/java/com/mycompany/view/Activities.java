@@ -8,7 +8,9 @@ import com.mycompany.controller.ActivityController;
 import com.mycompany.controller.TriviaRoundController;
 import com.mycompany.model.Activity;
 import com.mycompany.model.CosplayScore;
-import com.mycompany.model.CosplayScoreController;
+import com.mycompany.controller.CosplayScoreController;
+import com.mycompany.controller.TriviaQuestionController;
+import com.mycompany.model.TriviaQuestion;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author hernan
  */
 public class Activities extends javax.swing.JFrame {
-
+private TriviaQuestionController triviaQuestionController;
     /**
      * Creates new form Activities
      */
@@ -32,6 +34,9 @@ public class Activities extends javax.swing.JFrame {
         triviaRoundController.updateTable();
         cosplayScoreController = new CosplayScoreController(this, CosplayTable); // Inicialización
         cosplayScoreController.updateTable();
+        triviaQuestionController = new TriviaQuestionController(this, TriviaQuestionsTable);
+        System.out.println("triviaQuestionController inicializado: " + (triviaQuestionController != null));
+        triviaQuestionController.updateTable();
         
     }
     
@@ -52,6 +57,7 @@ public class Activities extends javax.swing.JFrame {
         buttonGroup5 = new javax.swing.ButtonGroup();
         buttonGroup6 = new javax.swing.ButtonGroup();
         buttonGroup7 = new javax.swing.ButtonGroup();
+        jButton5 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -100,6 +106,30 @@ public class Activities extends javax.swing.JFrame {
         ScoreCosplay = new javax.swing.JTextField();
         SearchCosplay = new javax.swing.JToggleButton();
         SearchCosplayText = new javax.swing.JTextField();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TriviaQuestionsTable = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        EventIdQuestion = new javax.swing.JTextField();
+        QuestionText = new javax.swing.JTextField();
+        CategoryIdText = new javax.swing.JTextField();
+        CorrectAnswerText = new javax.swing.JTextField();
+        CategoryText = new javax.swing.JTextField();
+        SearchQuestionText = new javax.swing.JTextField();
+        SearchQuestion = new javax.swing.JButton();
+        CreateQuestion = new javax.swing.JButton();
+        UpdateQuestion = new javax.swing.JButton();
+        DeleteQuestion = new javax.swing.JButton();
+        ComboBoxDifficult = new javax.swing.JComboBox<>();
+
+        jButton5.setText("jButton5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,7 +221,7 @@ public class Activities extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addContainerGap(256, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -437,7 +467,7 @@ public class Activities extends javax.swing.JFrame {
                 .addComponent(SearchCosplay)
                 .addGap(18, 18, 18)
                 .addComponent(SearchCosplayText, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,6 +529,199 @@ public class Activities extends javax.swing.JFrame {
         jTabbedPane4.addTab("tab1", jPanel3);
 
         jTabbedPane1.addTab("Score", jTabbedPane4);
+
+        TriviaQuestionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Question", "Correct Answer", "Category", "difficulty", "event_id", "category_id"
+            }
+        ));
+        jScrollPane3.setViewportView(TriviaQuestionsTable);
+
+        jLabel12.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
+        jLabel12.setText("CreateQuestions");
+
+        jLabel15.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel15.setText("Question");
+
+        jLabel16.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel16.setText("Difficult");
+
+        jLabel17.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel17.setText("Correct Answer");
+
+        jLabel18.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel18.setText("Category");
+
+        jLabel19.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel19.setText("Category id");
+
+        jLabel20.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        jLabel20.setText("Event id");
+
+        EventIdQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        QuestionText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        CategoryIdText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        CorrectAnswerText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        CategoryText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        SearchQuestionText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+
+        SearchQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        SearchQuestion.setText("Search");
+        SearchQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchQuestionActionPerformed(evt);
+            }
+        });
+
+        CreateQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        CreateQuestion.setText("Create");
+        CreateQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateQuestionActionPerformed(evt);
+            }
+        });
+
+        UpdateQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        UpdateQuestion.setText("Update");
+        UpdateQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateQuestionActionPerformed(evt);
+            }
+        });
+
+        DeleteQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        DeleteQuestion.setText("Delete");
+        DeleteQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteQuestionActionPerformed(evt);
+            }
+        });
+
+        ComboBoxDifficult.setFont(new java.awt.Font("Bradley Hand", 0, 14)); // NOI18N
+        ComboBoxDifficult.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EASY", "INTERMEDIATE", "HARD" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addGap(222, 222, 222))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CorrectAnswerText))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(QuestionText, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addGap(20, 20, 20)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(CategoryText, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(SearchQuestion))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(ComboBoxDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(CreateQuestion)
+                                        .addGap(67, 67, 67)))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(UpdateQuestion)
+                                .addGap(56, 56, 56)
+                                .addComponent(DeleteQuestion)
+                                .addGap(56, 56, 56))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CategoryIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(EventIdQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SearchQuestionText, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(QuestionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel19)
+                            .addComponent(CategoryIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CorrectAnswerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(EventIdQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(SearchQuestionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchQuestion)
+                    .addComponent(CategoryText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(ComboBoxDifficult, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CreateQuestion)
+                            .addComponent(UpdateQuestion)
+                            .addComponent(DeleteQuestion))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("tab1", jPanel2);
+
+        jTabbedPane1.addTab("Create Questions", jTabbedPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -686,6 +909,73 @@ public class Activities extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DeleteActionPerformed
 
+    private void SearchQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchQuestionActionPerformed
+        try {
+            int questionId = Integer.parseInt(SearchQuestionText.getText());
+            TriviaQuestion triviaQuestion = triviaQuestionController.searchTriviaQuestion(questionId);
+
+            if (triviaQuestion != null) {
+                QuestionText.setText(triviaQuestion.getQuestion());
+                CorrectAnswerText.setText(triviaQuestion.getCorrectAnswer());
+                CategoryText.setText(triviaQuestion.getCategory());
+                ComboBoxDifficult.setSelectedItem(triviaQuestion.getDifficulty());
+                EventIdQuestion.setText(String.valueOf(triviaQuestion.getEventId()));
+                CategoryIdText.setText(String.valueOf(triviaQuestion.getCategoryId()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Pregunta de trivia no encontrada.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+        }
+    }//GEN-LAST:event_SearchQuestionActionPerformed
+
+    private void CreateQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateQuestionActionPerformed
+        try {
+            String question = QuestionText.getText();
+            String correctAnswer = CorrectAnswerText.getText();
+            String category = CategoryText.getText();
+            String difficulty = ComboBoxDifficult.getSelectedItem().toString();
+            int eventId = Integer.parseInt(EventIdQuestion.getText());
+            int categoryId = Integer.parseInt(CategoryIdText.getText());
+
+            triviaQuestionController.createTriviaQuestion(question, correctAnswer, category, difficulty, eventId, categoryId);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+        }
+    }//GEN-LAST:event_CreateQuestionActionPerformed
+
+    private void UpdateQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateQuestionActionPerformed
+        try {
+            int questionId = Integer.parseInt(SearchQuestionText.getText());
+            String question = QuestionText.getText();
+            String correctAnswer = CorrectAnswerText.getText();
+            String category = CategoryText.getText();
+            String difficulty = ComboBoxDifficult.getSelectedItem().toString();
+            int eventId = Integer.parseInt(EventIdQuestion.getText());
+            int categoryId = Integer.parseInt(CategoryIdText.getText());
+
+            TriviaQuestion triviaQuestion = new TriviaQuestion(question, correctAnswer, category, difficulty, eventId, categoryId);
+            triviaQuestionController.updateTriviaQuestion(questionId, triviaQuestion);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa valores válidos.");
+        }
+    }//GEN-LAST:event_UpdateQuestionActionPerformed
+
+    private void DeleteQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteQuestionActionPerformed
+        try {
+            int questionId = Integer.parseInt(SearchQuestionText.getText());
+
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar esta pregunta de trivia?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            triviaQuestionController.deleteTriviaQuestion(questionId);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un ID válido.");
+        }
+    }//GEN-LAST:event_DeleteQuestionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -725,26 +1015,38 @@ public class Activities extends javax.swing.JFrame {
     private javax.swing.JTable ActivityTable;
     private javax.swing.JToggleButton AddButton;
     private javax.swing.JTextField CategoriId;
+    private javax.swing.JTextField CategoryIdText;
+    private javax.swing.JTextField CategoryText;
+    private javax.swing.JComboBox<String> ComboBoxDifficult;
+    private javax.swing.JTextField CorrectAnswerText;
     private javax.swing.JTable CosplayTable;
     private javax.swing.JButton Create;
+    private javax.swing.JButton CreateQuestion;
     private javax.swing.JTextField DateActivity;
     private javax.swing.JButton Delete;
     private javax.swing.JToggleButton DeleteButton;
+    private javax.swing.JButton DeleteQuestion;
     private javax.swing.JToggleButton EditCosplay;
     private javax.swing.JTextField EventId;
+    private javax.swing.JTextField EventIdQuestion;
     private javax.swing.JTextField JudgeId;
     private javax.swing.JTextField ManagerId;
     private javax.swing.JTextField NameActivity;
     private javax.swing.JTextField ParticipantId;
     private javax.swing.JTextField ParticipantsNum;
+    private javax.swing.JTextField QuestionText;
     private javax.swing.JTextField ScoreCosplay;
     private javax.swing.JButton Search;
     private javax.swing.JToggleButton SearchCosplay;
     private javax.swing.JTextField SearchCosplayText;
+    private javax.swing.JButton SearchQuestion;
+    private javax.swing.JTextField SearchQuestionText;
     private javax.swing.JTextField SearchText;
+    private javax.swing.JTable TriviaQuestionsTable;
     private javax.swing.JTable TriviaTable;
     private javax.swing.JComboBox<String> TypeActivity;
     private javax.swing.JButton Update;
+    private javax.swing.JButton UpdateQuestion;
     private javax.swing.JButton back4;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -753,12 +1055,20 @@ public class Activities extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -767,13 +1077,16 @@ public class Activities extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
