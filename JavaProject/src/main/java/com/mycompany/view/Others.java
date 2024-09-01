@@ -353,7 +353,9 @@ public class Others extends javax.swing.JFrame {
     }//GEN-LAST:event_back5ActionPerformed
 
     private void VisitorsButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton1ActionPerformed
-        // TODO add your handling code here:
+        Stadistics sta = new Stadistics();
+        sta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VisitorsButton1ActionPerformed
 
     private void VisitorsButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisitorsButton2ActionPerformed

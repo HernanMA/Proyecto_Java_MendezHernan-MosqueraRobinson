@@ -4,6 +4,13 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.controller.ShopStatisticsController;
+import com.mycompany.model.ShopStatistics;
+import com.mycompany.model.ShopStatisticsDAO;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hernan
@@ -15,6 +22,27 @@ public class Stadistics extends javax.swing.JFrame {
      */
     public Stadistics() {
         initComponents();
+        setLocationRelativeTo(null);
+        loadTableData(); 
+    }
+    private void loadTableData() {
+        ShopStatisticsDAO statisticsDAO = new ShopStatisticsDAO();
+        List<ShopStatistics> statisticsList = statisticsDAO.getShopStatistics();
+        DefaultTableModel model = (DefaultTableModel) TableStadistics.getModel();
+
+        // Limpiar la tabla antes de agregar nuevos datos
+        model.setRowCount(0);
+
+        // Usar lambda para agregar los datos a la tabla
+        statisticsList.forEach(stat -> model.addRow(new Object[]{
+                stat.getShopId(),
+                stat.getManagerId(),
+                stat.getManagerName(),
+                stat.getTotalSales()
+        }));
+    }
+    public JTable getTableStadistics() {
+        return TableStadistics;
     }
 
     /**
@@ -31,7 +59,7 @@ public class Stadistics extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TableStadistics = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -51,7 +79,7 @@ public class Stadistics extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("Stadistics");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TableStadistics.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,10 +87,10 @@ public class Stadistics extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "shop_id", "manager_id", "manager_name", "total_sales"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(TableStadistics);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,11 +171,11 @@ public class Stadistics extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableStadistics;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
