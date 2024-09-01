@@ -13,12 +13,19 @@ import com.mycompany.controller.TriviaController;
 import com.mycompany.controller.TriviaQuestionController;
 import com.mycompany.model.TriviaModel;
 import com.mycompany.model.TriviaQuestion;
+import com.mycompany.util.Conexion;
+import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -88,6 +95,103 @@ private TriviaModel triviaModel;
     public void showScore(int score) {
         JOptionPane.showMessageDialog(this, "Tu puntaje es: " + score + "/10");
     }
+    
+    
+    private void saveWinner(int participant1Id, int participant2Id, int winnerId) throws SQLException {
+    Connection conexion = null;
+    PreparedStatement stmt = null;
+
+    try {
+        conexion = Conexion.getInstance().conectar();
+        String sql = "INSERT INTO TriviaRounds (event_id, round_number, participant1_id, participant2_id, winner_id) VALUES (?, ?, ?, ?, ?)";
+        stmt = conexion.prepareStatement(sql);
+        
+        stmt.setInt(1,1 /* Event ID corre1spondiente */);
+        stmt.setInt(2,1 /* Número de ronda, si aplicable */);
+        stmt.setInt(3, participant1Id);
+        stmt.setInt(4, participant2Id);
+        stmt.setInt(5, winnerId);
+        
+        stmt.executeUpdate();
+    } finally {
+        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+        if (conexion != null) Conexion.getInstance().cerrarConexion(conexion);
+    }
+}
+    
+    private JPanel createTriviaPanel(List<String> questions, String participantPrompt) {
+    JPanel panel = new JPanel();
+    panel.setLayout(new GridLayout(questions.size() + 2, 2));
+
+    // Campo de texto para el ID del participante
+    panel.add(new JLabel(participantPrompt));
+    JTextField idField = new JTextField(10);
+    panel.add(idField);
+
+    // Preguntas y campos de texto para las respuestas
+    for (String question : questions) {
+        panel.add(new JLabel(question));
+        JTextField answerField = new JTextField(20);
+        panel.add(answerField);
+    }
+
+    return panel;
+}
+
+
+
+private List<String> getAnswersFromPanel(JPanel panel, int numberOfQuestions) {
+    List<String> answers = new ArrayList<>();
+
+    // Itera sobre los componentes del panel para obtener las respuestas
+    for (int i = 1; i < panel.getComponentCount(); i += 2) { // Asume que los JTextField están en posiciones impares
+        Component component = panel.getComponent(i);
+        if (component instanceof JTextField) {
+            JTextField answerField = (JTextField) component;
+            answers.add(answerField.getText());
+        }
+    }
+
+    return answers;
+}
+
+
+
+private void processResults(int participant1Id, List<String> answers1, int participant2Id, List<String> answers2) throws SQLException {
+    // Obtener las preguntas que se usaron en el juego
+    List<String> questions = triviaModel.getRandomQuestions(); // Se deben usar las mismas preguntas para ambos participantes
+
+    // Calcular puntajes
+    int participant1Score = calculateScore(questions, answers1);
+    int participant2Score = calculateScore(questions, answers2);
+
+    // Determinar el ganador
+    int winnerId = participant1Score > participant2Score ? participant1Id : participant2Id;
+
+    // Mostrar puntajes y ganador
+    JPanel resultPanel = new JPanel();
+    resultPanel.add(new JLabel("Puntaje del participante " + participant1Id + ": " + participant1Score));
+    resultPanel.add(new JLabel("Puntaje del participante " + participant2Id + ": " + participant2Score));
+    resultPanel.add(new JLabel("El ganador es el participante con ID: " + winnerId));
+    
+    JOptionPane.showMessageDialog(null, resultPanel, "Resultado del Juego", JOptionPane.INFORMATION_MESSAGE);
+
+    // Guardar el ganador en la base de datos
+    saveWinner(participant1Id, participant2Id, winnerId);
+}
+
+
+private int calculateScore(List<String> questions, List<String> answers) throws SQLException {
+    // Utiliza el método checkAnswers del TriviaModel para calcular el puntaje
+    return triviaModel.checkAnswers(questions, answers);
+}
+
+
+
+
+
+
+
 
 
     /**
@@ -158,6 +262,7 @@ private TriviaModel triviaModel;
         Answer10 = new javax.swing.JTextField();
         StartGameButton = new javax.swing.JButton();
         FinishGameButton = new javax.swing.JButton();
+        StartRealGame = new javax.swing.JButton();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -480,6 +585,14 @@ private TriviaModel triviaModel;
             }
         });
 
+        StartRealGame.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        StartRealGame.setText("START!!!!!!");
+        StartRealGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartRealGameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -494,7 +607,9 @@ private TriviaModel triviaModel;
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(StartGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 462, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                                .addComponent(StartRealGame, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(132, 132, 132)
                                 .addComponent(FinishGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,7 +645,8 @@ private TriviaModel triviaModel;
                 .addGap(13, 13, 13)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StartGameButton)
-                    .addComponent(FinishGameButton))
+                    .addComponent(FinishGameButton)
+                    .addComponent(StartRealGame))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Question1)
@@ -600,19 +716,19 @@ private TriviaModel triviaModel;
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addGap(330, 330, 330))
+                .addGap(444, 444, 444))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel10)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97))
         );
@@ -680,14 +796,8 @@ private TriviaModel triviaModel;
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(304, 304, 304))))
+                .addComponent(jScrollPane4)
+                .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -713,15 +823,19 @@ private TriviaModel triviaModel;
                     .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EditCosplay, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(419, 419, 419))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(ScoreCosplay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -738,7 +852,7 @@ private TriviaModel triviaModel;
                             .addComponent(JudgeId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(57, 57, 57)
                         .addComponent(AddButton)
                         .addGap(18, 18, 18)
                         .addComponent(DeleteButton)
@@ -1235,6 +1349,39 @@ private TriviaModel triviaModel;
     }
     }//GEN-LAST:event_FinishGameButtonActionPerformed
 
+    private void StartRealGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartRealGameActionPerformed
+        try {
+        // Obtener 10 preguntas aleatorias
+        List<String> questions = triviaModel.getRandomQuestions();
+
+        // Panel para el primer participante
+        JPanel panel1 = createTriviaPanel(questions, "Ingrese el ID del primer participante");
+
+        // Mostrar el panel y obtener el ID y respuestas del primer participante
+        int result1 = JOptionPane.showConfirmDialog(null, panel1, "Trivia para el primer participante", JOptionPane.OK_CANCEL_OPTION);
+        if (result1 == JOptionPane.OK_OPTION) {
+            int participant1Id = Integer.parseInt(((JTextField) panel1.getComponent(1)).getText());
+            List<String> answers1 = getAnswersFromPanel(panel1, questions.size());
+
+            // Panel para el segundo participante
+            JPanel panel2 = createTriviaPanel(questions, "Ingrese el ID del segundo participante");
+
+            // Mostrar el panel y obtener el ID y respuestas del segundo participante
+            int result2 = JOptionPane.showConfirmDialog(null, panel2, "Trivia para el segundo participante", JOptionPane.OK_CANCEL_OPTION);
+            if (result2 == JOptionPane.OK_OPTION) {
+                int participant2Id = Integer.parseInt(((JTextField) panel2.getComponent(1)).getText());
+                List<String> answers2 = getAnswersFromPanel(panel2, questions.size());
+
+                // Comparar resultados y mostrar el ganador
+                processResults(participant1Id, answers1, participant2Id, answers2);
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_StartRealGameActionPerformed
+
+    
     
     /**
      * @param args the command line arguments
@@ -1324,6 +1471,7 @@ private TriviaModel triviaModel;
     private javax.swing.JTextField SearchQuestionText;
     private javax.swing.JTextField SearchText;
     private javax.swing.JButton StartGameButton;
+    private javax.swing.JButton StartRealGame;
     private javax.swing.JTable TriviaQuestionsTable;
     private javax.swing.JTable TriviaTable;
     private javax.swing.JComboBox<String> TypeActivity;
