@@ -1351,33 +1351,44 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
 
     private void StartRealGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartRealGameActionPerformed
         try {
-        // Obtener 10 preguntas aleatorias
+        // Crear el panel para el primer participante
         List<String> questions = triviaModel.getRandomQuestions();
+        JPanel triviaPanel = createTriviaPanel(questions, "Ingrese el ID del primer participante:");
+        int result = JOptionPane.showConfirmDialog(this, triviaPanel, "Trivia", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (result == JOptionPane.OK_OPTION) {
+            // Obtener ID del primer participante
+            JTextField idField = (JTextField) triviaPanel.getComponent(1);
+            int participant1Id = Integer.parseInt(idField.getText());
 
-        // Panel para el primer participante
-        JPanel panel1 = createTriviaPanel(questions, "Ingrese el ID del primer participante");
+            // Obtener respuestas del primer participante
+            List<String> answers1 = getAnswersFromPanel(triviaPanel, questions.size());
+            int score1 = triviaModel.checkAnswers(questions, answers1);
 
-        // Mostrar el panel y obtener el ID y respuestas del primer participante
-        int result1 = JOptionPane.showConfirmDialog(null, panel1, "Trivia para el primer participante", JOptionPane.OK_CANCEL_OPTION);
-        if (result1 == JOptionPane.OK_OPTION) {
-            int participant1Id = Integer.parseInt(((JTextField) panel1.getComponent(1)).getText());
-            List<String> answers1 = getAnswersFromPanel(panel1, questions.size());
+            // Crear el panel para el segundo participante
+            triviaPanel = createTriviaPanel(questions, "Ingrese el ID del segundo participante:");
+            result = JOptionPane.showConfirmDialog(this, triviaPanel, "Trivia", JOptionPane.OK_CANCEL_OPTION);
+            
+            if (result == JOptionPane.OK_OPTION) {
+                // Obtener ID del segundo participante
+                idField = (JTextField) triviaPanel.getComponent(1);
+                int participant2Id = Integer.parseInt(idField.getText());
 
-            // Panel para el segundo participante
-            JPanel panel2 = createTriviaPanel(questions, "Ingrese el ID del segundo participante");
+                // Obtener respuestas del segundo participante
+                List<String> answers2 = getAnswersFromPanel(triviaPanel, questions.size());
+                int score2 = triviaModel.checkAnswers(questions, answers2);
 
-            // Mostrar el panel y obtener el ID y respuestas del segundo participante
-            int result2 = JOptionPane.showConfirmDialog(null, panel2, "Trivia para el segundo participante", JOptionPane.OK_CANCEL_OPTION);
-            if (result2 == JOptionPane.OK_OPTION) {
-                int participant2Id = Integer.parseInt(((JTextField) panel2.getComponent(1)).getText());
-                List<String> answers2 = getAnswersFromPanel(panel2, questions.size());
+                // Determinar el ganador
+                int winnerId = score1 > score2 ? participant1Id : participant2Id;
 
-                // Comparar resultados y mostrar el ganador
-                processResults(participant1Id, answers1, participant2Id, answers2);
+                // Mostrar resultados y guardar el ganador
+                JOptionPane.showMessageDialog(this, "El ganador es el participante con ID: " + winnerId);
+                saveWinner(participant1Id, participant2Id, winnerId);
             }
         }
-    } catch (SQLException ex) {
+    } catch (SQLException | NumberFormatException ex) {
         ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al procesar la trivia. " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_StartRealGameActionPerformed
 
