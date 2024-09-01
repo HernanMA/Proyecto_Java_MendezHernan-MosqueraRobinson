@@ -1379,11 +1379,26 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
                 int score2 = triviaModel.checkAnswers(questions, answers2);
 
                 // Determinar el ganador
-                int winnerId = score1 > score2 ? participant1Id : participant2Id;
+                int winnerId;
+                String resultMessage;
+                if (score1 > score2) {
+                    winnerId = participant1Id;
+                    resultMessage = "El ganador es el participante con ID: " + winnerId;
+                } else if (score2 > score1) {
+                    winnerId = participant2Id;
+                    resultMessage = "El ganador es el participante con ID: " + winnerId;
+                } else {
+                    winnerId = -1; // No hay ganador, es un empate
+                    resultMessage = "Empate";
+                }
 
                 // Mostrar resultados y guardar el ganador
-                JOptionPane.showMessageDialog(this, "El ganador es el participante con ID: " + winnerId);
-                saveWinner(participant1Id, participant2Id, winnerId);
+                JOptionPane.showMessageDialog(this, resultMessage);
+                if (winnerId != -1) {
+                    saveWinner(participant1Id, participant2Id, winnerId);
+                } else {
+                    saveTie(participant1Id, participant2Id); // Método para manejar empate
+                }
             }
         }
     } catch (SQLException | NumberFormatException ex) {
@@ -1392,6 +1407,27 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
     }
     }//GEN-LAST:event_StartRealGameActionPerformed
 
+    
+    private void saveTie(int participant1Id, int participant2Id) throws SQLException {
+    Connection conexion = null;
+    PreparedStatement stmt = null;
+
+    try {
+        conexion = Conexion.getInstance().conectar();
+        String sql = "INSERT INTO TriviaRounds (event_id, round_number, participant1_id, participant2_id, winner_id) VALUES (?, ?, ?, ?, NULL)";
+        stmt = conexion.prepareStatement(sql);
+        
+        stmt.setInt(1, 1 /* Event ID correspondiente */);
+        stmt.setInt(2, 1 /* Número de ronda, si aplicable */);
+        stmt.setInt(3, participant1Id);
+        stmt.setInt(4, participant2Id);
+        
+        stmt.executeUpdate();
+    } finally {
+        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+        if (conexion != null) Conexion.getInstance().cerrarConexion(conexion);
+    }
+}
     
     
     /**
