@@ -72,6 +72,8 @@ public class Visitors extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Visitors");
 
@@ -93,6 +95,7 @@ public class Visitors extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel7.setText("Phone Number");
 
+        AddVisitor.setBackground(new java.awt.Color(232, 224, 194));
         AddVisitor.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         AddVisitor.setText("Add");
         AddVisitor.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,7 @@ public class Visitors extends javax.swing.JFrame {
             }
         });
 
+        Searchvisitor.setBackground(new java.awt.Color(232, 224, 194));
         Searchvisitor.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Searchvisitor.setText("Search");
         Searchvisitor.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +113,7 @@ public class Visitors extends javax.swing.JFrame {
             }
         });
 
+        DeleteVisitor.setBackground(new java.awt.Color(232, 224, 194));
         DeleteVisitor.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteVisitor.setText("Delete");
         DeleteVisitor.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +122,7 @@ public class Visitors extends javax.swing.JFrame {
             }
         });
 
+        EditVisitors.setBackground(new java.awt.Color(232, 224, 194));
         EditVisitors.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         EditVisitors.setText("Edit");
         EditVisitors.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +131,7 @@ public class Visitors extends javax.swing.JFrame {
             }
         });
 
+        Visitors.setBackground(new java.awt.Color(236, 231, 215));
         Visitors.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

@@ -48,12 +48,15 @@ public class Software extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("WHAT DO YOU WANT TO DO?");
 
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel1.setText("Create, edit, delete and/or watch Event information");
 
+        events.setBackground(new java.awt.Color(232, 224, 194));
         events.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         events.setText("Events");
         events.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +68,7 @@ public class Software extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel3.setText("Create, manages, delete and/or watch Box Office information");
 
+        box.setBackground(new java.awt.Color(232, 224, 194));
         box.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         box.setText("Box Office");
         box.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +80,7 @@ public class Software extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel4.setText("Create, update, delete and/or watch events activities information");
 
+        activity.setBackground(new java.awt.Color(232, 224, 194));
         activity.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         activity.setText("Activities");
         activity.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +92,7 @@ public class Software extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel5.setText("Create, edit, delete,  watch or add discounts to shops information");
 
+        shops.setBackground(new java.awt.Color(232, 224, 194));
         shops.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         shops.setText("Shops");
         shops.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +104,7 @@ public class Software extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel6.setText("Create, edit, delete and/or watch Staff information");
 
+        staff.setBackground(new java.awt.Color(232, 224, 194));
         staff.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         staff.setText("Staff");
         staff.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +116,7 @@ public class Software extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel7.setText("Add, Update, delete and/or watch Inventory items information");
 
+        inventory.setBackground(new java.awt.Color(232, 224, 194));
         inventory.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         inventory.setText("Inventory");
         inventory.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +128,7 @@ public class Software extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel8.setText("Create, edit, delete and/or watch tickets information");
 
+        ticket.setBackground(new java.awt.Color(232, 224, 194));
         ticket.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         ticket.setText("Tickets");
         ticket.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +140,7 @@ public class Software extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel9.setText("Other sistem implementations");
 
+        Others.setBackground(new java.awt.Color(232, 224, 194));
         Others.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         Others.setText("Others");
         Others.addActionListener(new java.awt.event.ActionListener() {

@@ -56,6 +56,7 @@ public class BoxOffice extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tableTickets.setBackground(new java.awt.Color(236, 231, 215));
         tableTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -86,6 +87,8 @@ public class BoxOffice extends javax.swing.JFrame {
                 .addGap(217, 217, 217))
         );
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("TicketBooths");
 
@@ -105,6 +108,8 @@ public class BoxOffice extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jPanel3.setBackground(new java.awt.Color(246, 243, 235));
 
         back4.setBackground(new java.awt.Color(234, 230, 230));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
@@ -133,6 +138,7 @@ public class BoxOffice extends javax.swing.JFrame {
             }
         });
 
+        addTicket.setBackground(new java.awt.Color(232, 224, 194));
         addTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         addTicket.setText("Add");
         addTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -141,14 +147,16 @@ public class BoxOffice extends javax.swing.JFrame {
             }
         });
 
+        EditTickets.setBackground(new java.awt.Color(232, 224, 194));
         EditTickets.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        EditTickets.setText("Edit Tickets");
+        EditTickets.setText("Edit Ticketbooth");
         EditTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditTicketsActionPerformed(evt);
             }
         });
 
+        searchTickets.setBackground(new java.awt.Color(232, 224, 194));
         searchTickets.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         searchTickets.setText("Search");
         searchTickets.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +165,7 @@ public class BoxOffice extends javax.swing.JFrame {
             }
         });
 
+        DeleteTickets.setBackground(new java.awt.Color(232, 224, 194));
         DeleteTickets.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteTickets.setText("Delete");
         DeleteTickets.addActionListener(new java.awt.event.ActionListener() {

@@ -110,6 +110,8 @@ public class Events extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Events");
 
@@ -143,7 +145,7 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
-        createEvent.setBackground(new java.awt.Color(231, 231, 231));
+        createEvent.setBackground(new java.awt.Color(232, 224, 194));
         createEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         createEvent.setText("Create Event");
         createEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +154,7 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
-        deleteEvent.setBackground(new java.awt.Color(231, 231, 231));
+        deleteEvent.setBackground(new java.awt.Color(232, 224, 194));
         deleteEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         deleteEvent.setText("Delete Event");
         deleteEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +163,7 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
-        editEvent.setBackground(new java.awt.Color(231, 231, 231));
+        editEvent.setBackground(new java.awt.Color(232, 224, 194));
         editEvent.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         editEvent.setText("Edit Event");
         editEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +202,7 @@ public class Events extends javax.swing.JFrame {
             }
         });
 
-        searchButton.setBackground(new java.awt.Color(231, 231, 231));
+        searchButton.setBackground(new java.awt.Color(232, 224, 194));
         searchButton.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -307,6 +309,7 @@ public class Events extends javax.swing.JFrame {
                                 .addGap(18, 86, Short.MAX_VALUE))))))
         );
 
+        tableEvents.setBackground(new java.awt.Color(236, 231, 215));
         tableEvents.setFont(new java.awt.Font("Bradley Hand", 0, 14)); // NOI18N
         tableEvents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -58,6 +58,9 @@ public class Others extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
+        VisitorsButton.setBackground(new java.awt.Color(232, 224, 194));
         VisitorsButton.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         VisitorsButton.setText("Visitors");
         VisitorsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +69,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
-        back5.setBackground(new java.awt.Color(234, 230, 230));
+        back5.setBackground(new java.awt.Color(232, 224, 194));
         back5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back5.setText("Back");
         back5.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +78,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        VisitorsButton1.setBackground(new java.awt.Color(232, 224, 194));
         VisitorsButton1.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         VisitorsButton1.setText("Stadistics");
         VisitorsButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +90,7 @@ public class Others extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("OTHERS");
 
+        VisitorsButton2.setBackground(new java.awt.Color(232, 224, 194));
         VisitorsButton2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         VisitorsButton2.setText("Prizes");
         VisitorsButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +99,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        VisitorsButton3.setBackground(new java.awt.Color(232, 224, 194));
         VisitorsButton3.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         VisitorsButton3.setText("Commerce");
         VisitorsButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +108,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        Orders.setBackground(new java.awt.Color(232, 224, 194));
         Orders.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         Orders.setText("Orders");
         Orders.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +117,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        RestaurantsButton.setBackground(new java.awt.Color(232, 224, 194));
         RestaurantsButton.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         RestaurantsButton.setText("Restaurants");
         RestaurantsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +126,7 @@ public class Others extends javax.swing.JFrame {
             }
         });
 
+        Discounts.setBackground(new java.awt.Color(232, 224, 194));
         Discounts.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         Discounts.setText("Discounts");
         Discounts.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +186,6 @@ public class Others extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(Discounts))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel8)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -188,7 +194,10 @@ public class Others extends javax.swing.JFrame {
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel10)))
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(Discounts)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(back5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -257,7 +266,7 @@ public class Others extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,7 +277,7 @@ public class Others extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VisitorsButton1)
                     .addComponent(VisitorsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel13))
@@ -289,19 +298,19 @@ public class Others extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RestaurantsButton)
                             .addComponent(Orders))
-                        .addGap(146, 146, 146))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(93, 93, 93))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Discounts)
-                        .addGap(16, 16, 16))))
+                        .addComponent(jLabel10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Discounts)
+                .addGap(16, 16, 16))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(back5))

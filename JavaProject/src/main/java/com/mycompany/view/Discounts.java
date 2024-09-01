@@ -67,6 +67,8 @@ private DiscountController discountController;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("Discounts");
 
@@ -94,6 +96,7 @@ private DiscountController discountController;
         ComboBoxDiscountType.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         ComboBoxDiscountType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PERCENTAGE", "FIXED_AMOUNT", "BUNDLE" }));
 
+        AddDiscount.setBackground(new java.awt.Color(232, 224, 194));
         AddDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         AddDiscount.setText("Add Discount");
         AddDiscount.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +105,7 @@ private DiscountController discountController;
             }
         });
 
+        EditDiscount.setBackground(new java.awt.Color(232, 224, 194));
         EditDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         EditDiscount.setText("Edit Discount");
         EditDiscount.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +114,7 @@ private DiscountController discountController;
             }
         });
 
+        backk.setBackground(new java.awt.Color(232, 224, 194));
         backk.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         backk.setText("Back");
         backk.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +131,7 @@ private DiscountController discountController;
             }
         });
 
+        DeleteDiscount.setBackground(new java.awt.Color(232, 224, 194));
         DeleteDiscount.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteDiscount.setText("Delete Discount");
         DeleteDiscount.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +238,7 @@ private DiscountController discountController;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        TableDiscounts.setBackground(new java.awt.Color(236, 231, 215));
         TableDiscounts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},

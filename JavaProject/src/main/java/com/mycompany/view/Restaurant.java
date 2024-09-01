@@ -61,12 +61,17 @@ public class Restaurant extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("RESTAURANTS");
 
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel2.setText("Ingrese Id del platillo");
 
+        buyDish.setBackground(new java.awt.Color(232, 224, 194));
         buyDish.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         buyDish.setText("Comprar");
         buyDish.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +80,7 @@ public class Restaurant extends javax.swing.JFrame {
             }
         });
 
+        DishesRestaurant.setBackground(new java.awt.Color(236, 231, 215));
         DishesRestaurant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -88,7 +94,7 @@ public class Restaurant extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(DishesRestaurant);
 
-        back6.setBackground(new java.awt.Color(234, 230, 230));
+        back6.setBackground(new java.awt.Color(232, 224, 194));
         back6.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back6.setText("Back");
         back6.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +151,7 @@ public class Restaurant extends javax.swing.JFrame {
                     .addComponent(buyDish, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        ingredientsRestaurant.setBackground(new java.awt.Color(236, 231, 215));
         ingredientsRestaurant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -260,8 +267,6 @@ public class Restaurant extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DishesRestaurant;
-    private javax.swing.JButton back4;
-    private javax.swing.JButton back5;
     private javax.swing.JButton back6;
     private javax.swing.JButton buyDish;
     private javax.swing.JTextField idplatillo;

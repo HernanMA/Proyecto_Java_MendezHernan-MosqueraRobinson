@@ -80,9 +80,12 @@ public class StadisticsAPI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("Stadistics");
 
+        TableStadistics.setBackground(new java.awt.Color(236, 231, 215));
         TableStadistics.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -96,7 +99,7 @@ public class StadisticsAPI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(TableStadistics);
 
-        back.setBackground(new java.awt.Color(234, 230, 230));
+        back.setBackground(new java.awt.Color(232, 224, 194));
         back.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {

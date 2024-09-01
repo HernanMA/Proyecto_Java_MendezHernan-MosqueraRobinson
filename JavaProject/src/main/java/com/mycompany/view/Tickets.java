@@ -74,6 +74,9 @@ public class Tickets extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
+        TableTickets.setBackground(new java.awt.Color(236, 231, 215));
         TableTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -90,6 +93,7 @@ public class Tickets extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Tickets!");
 
+        StatusOptions.setBackground(new java.awt.Color(232, 224, 194));
         StatusOptions.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         StatusOptions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Reserved", "To Buy", "Everything" }));
         StatusOptions.addActionListener(new java.awt.event.ActionListener() {
@@ -137,9 +141,7 @@ public class Tickets extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel13))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalsumText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,6 +179,8 @@ public class Tickets extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel3.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel3.setText("Name");
 
@@ -198,6 +202,7 @@ public class Tickets extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel9.setText("Customer");
 
+        CreateTicket.setBackground(new java.awt.Color(232, 224, 194));
         CreateTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         CreateTicket.setText("Create");
         CreateTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +211,7 @@ public class Tickets extends javax.swing.JFrame {
             }
         });
 
+        UpdateTicket.setBackground(new java.awt.Color(232, 224, 194));
         UpdateTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         UpdateTicket.setText("Update");
         UpdateTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +220,7 @@ public class Tickets extends javax.swing.JFrame {
             }
         });
 
+        DeleteTicket.setBackground(new java.awt.Color(232, 224, 194));
         DeleteTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteTicket.setText("Delete");
         DeleteTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +229,7 @@ public class Tickets extends javax.swing.JFrame {
             }
         });
 
-        back4.setBackground(new java.awt.Color(234, 230, 230));
+        back4.setBackground(new java.awt.Color(232, 224, 194));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back4.setText("Back");
         back4.addActionListener(new java.awt.event.ActionListener() {
@@ -231,6 +238,7 @@ public class Tickets extends javax.swing.JFrame {
             }
         });
 
+        SearchTicket.setBackground(new java.awt.Color(232, 224, 194));
         SearchTicket.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         SearchTicket.setText("Search");
         SearchTicket.addActionListener(new java.awt.event.ActionListener() {

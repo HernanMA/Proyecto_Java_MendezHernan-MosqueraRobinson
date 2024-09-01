@@ -186,14 +186,6 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
     return triviaModel.checkAnswers(questions, answers);
 }
 
-
-
-
-
-
-
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -311,6 +303,8 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Create Activity");
 
@@ -338,7 +332,7 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
         jLabel9.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel9.setText("Event id");
 
-        Update.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        Update.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Update.setText("Update");
         Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,16 +340,16 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             }
         });
 
-        Create.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        Create.setText("Create");
+        Create.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        Create.setText("Create Activity");
         Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateActionPerformed(evt);
             }
         });
 
-        Delete.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        Delete.setText("Delete");
+        Delete.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        Delete.setText("Delete Activity");
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteActionPerformed(evt);
@@ -371,6 +365,7 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             }
         });
 
+        ActivityTable.setBackground(new java.awt.Color(236, 231, 215));
         ActivityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -424,23 +419,18 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(140, 140, 140)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(jLabel6))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel6)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(64, 64, 64)
-                                        .addComponent(Create, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Create, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(Delete)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 54, Short.MAX_VALUE)
+                                .addGap(0, 30, Short.MAX_VALUE)
                                 .addComponent(Update, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(121, 121, 121))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -473,25 +463,20 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
                             .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(SearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(NameActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(0, 120, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(TypeActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(DateActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(ParticipantsNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(TypeActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(DateActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ParticipantsNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -515,6 +500,8 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
         jTabbedPane5.addTab("tab1", jPanel1);
 
         jTabbedPane1.addTab("Management", jTabbedPane5);
+
+        jPanel6.setBackground(new java.awt.Color(246, 243, 235));
 
         Question1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Question1.setText("jLabel21");
@@ -694,6 +681,9 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
 
         jTabbedPane1.addTab("Trivia", jTabbedPane3);
 
+        jPanel4.setBackground(new java.awt.Color(246, 243, 235));
+
+        TriviaTable.setBackground(new java.awt.Color(236, 231, 215));
         TriviaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -733,6 +723,9 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
                 .addGap(97, 97, 97))
         );
 
+        jPanel5.setBackground(new java.awt.Color(246, 243, 235));
+
+        CosplayTable.setBackground(new java.awt.Color(236, 231, 215));
         CosplayTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -884,6 +877,9 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
 
         jTabbedPane1.addTab("Score", jTabbedPane4);
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
+        TriviaQuestionsTable.setBackground(new java.awt.Color(236, 231, 215));
         TriviaQuestionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -938,6 +934,7 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             }
         });
 
+        CreateQuestion.setBackground(new java.awt.Color(232, 224, 194));
         CreateQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         CreateQuestion.setText("Create");
         CreateQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -946,6 +943,7 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             }
         });
 
+        UpdateQuestion.setBackground(new java.awt.Color(232, 224, 194));
         UpdateQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         UpdateQuestion.setText("Update");
         UpdateQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -954,6 +952,7 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             }
         });
 
+        DeleteQuestion.setBackground(new java.awt.Color(232, 224, 194));
         DeleteQuestion.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         DeleteQuestion.setText("Delete");
         DeleteQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -1360,11 +1359,9 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
             // Obtener ID del primer participante
             JTextField idField = (JTextField) triviaPanel.getComponent(1);
             int participant1Id = Integer.parseInt(idField.getText());
-
             // Obtener respuestas del primer participante
             List<String> answers1 = getAnswersFromPanel(triviaPanel, questions.size());
             int score1 = triviaModel.checkAnswers(questions, answers1);
-
             // Crear el panel para el segundo participante
             triviaPanel = createTriviaPanel(questions, "Ingrese el ID del segundo participante:");
             result = JOptionPane.showConfirmDialog(this, triviaPanel, "Trivia", JOptionPane.OK_CANCEL_OPTION);
@@ -1373,7 +1370,6 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
                 // Obtener ID del segundo participante
                 idField = (JTextField) triviaPanel.getComponent(1);
                 int participant2Id = Integer.parseInt(idField.getText());
-
                 // Obtener respuestas del segundo participante
                 List<String> answers2 = getAnswersFromPanel(triviaPanel, questions.size());
                 int score2 = triviaModel.checkAnswers(questions, answers2);
@@ -1416,12 +1412,12 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
         conexion = Conexion.getInstance().conectar();
         String sql = "INSERT INTO TriviaRounds (event_id, round_number, participant1_id, participant2_id, winner_id) VALUES (?, ?, ?, ?, NULL)";
         stmt = conexion.prepareStatement(sql);
-        
+
         stmt.setInt(1, 1 /* Event ID correspondiente */);
         stmt.setInt(2, 1 /* Número de ronda, si aplicable */);
         stmt.setInt(3, participant1Id);
         stmt.setInt(4, participant2Id);
-        
+
         stmt.executeUpdate();
     } finally {
         if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }

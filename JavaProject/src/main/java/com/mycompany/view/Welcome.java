@@ -39,12 +39,15 @@ public class Welcome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("WELCOME");
 
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel1.setText("Please Read the instructions first to understand the software");
 
+        instructions.setBackground(new java.awt.Color(232, 224, 194));
         instructions.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         instructions.setText("Read the instructions");
         instructions.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +59,7 @@ public class Welcome extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel3.setText("To get in the software click \"Enter\"");
 
+        enter.setBackground(new java.awt.Color(232, 224, 194));
         enter.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         enter.setText("Enter");
         enter.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +71,7 @@ public class Welcome extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jLabel4.setText("To watch the events information click Here");
 
+        watch.setBackground(new java.awt.Color(232, 224, 194));
         watch.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         watch.setText("Watch");
         watch.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +80,7 @@ public class Welcome extends javax.swing.JFrame {
             }
         });
 
-        back.setBackground(new java.awt.Color(234, 230, 230));
+        back.setBackground(new java.awt.Color(232, 224, 194));
         back.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +115,7 @@ public class Welcome extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(back)
-                        .addGap(176, 176, 176)
+                        .addGap(184, 184, 184)
                         .addComponent(watch)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );

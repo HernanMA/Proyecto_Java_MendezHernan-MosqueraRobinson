@@ -36,16 +36,20 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("ANIME  EVENT  MASTER");
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(236, 231, 215));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setText("Unleash the power of technology and precision to craft unforgettable \nanime events. This all-in-one software empowers you to effortlessly \norchestrate every detail, from unique event creation to seamless management \nof ticketing, cosplay and trivia activities, and efficient oversight of vendors \nand staff. With intuitive interfaces, detailed reports, and comprehensive \ninventory and role management, Anime Event Master is your ultimate tool \nfor transforming any event into an epic experience, ensuring everything \n\t      runs smoothly and flawlessly.");
         jScrollPane2.setViewportView(jTextArea1);
 
+        start.setBackground(new java.awt.Color(232, 224, 194));
         start.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         start.setText("Start");
         start.addActionListener(new java.awt.event.ActionListener() {

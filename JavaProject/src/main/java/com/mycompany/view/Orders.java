@@ -63,6 +63,8 @@ private OrderController orderController;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("Orders");
 
@@ -81,6 +83,7 @@ private OrderController orderController;
         jLabel7.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel7.setText("Total Value");
 
+        SearchOrder.setBackground(new java.awt.Color(232, 224, 194));
         SearchOrder.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         SearchOrder.setText("Search");
         SearchOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +92,7 @@ private OrderController orderController;
             }
         });
 
+        UpdateOrder.setBackground(new java.awt.Color(232, 224, 194));
         UpdateOrder.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         UpdateOrder.setText("UPDATE");
         UpdateOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +101,7 @@ private OrderController orderController;
             }
         });
 
+        addOrder.setBackground(new java.awt.Color(232, 224, 194));
         addOrder.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         addOrder.setText("ADD");
         addOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +110,7 @@ private OrderController orderController;
             }
         });
 
+        Deleteorder.setBackground(new java.awt.Color(232, 224, 194));
         Deleteorder.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Deleteorder.setText("DELETE");
         Deleteorder.addActionListener(new java.awt.event.ActionListener() {
@@ -236,6 +242,7 @@ private OrderController orderController;
                                 .addGap(15, 15, 15))))))
         );
 
+        OrdersTable.setBackground(new java.awt.Color(236, 231, 215));
         OrdersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

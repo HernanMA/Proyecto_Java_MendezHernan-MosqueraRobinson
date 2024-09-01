@@ -61,9 +61,12 @@ private PrizeController prizeController;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Who wants a Prize?");
 
+        PrizeTable.setBackground(new java.awt.Color(236, 231, 215));
         PrizeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -110,6 +113,7 @@ private PrizeController prizeController;
 
         GeneralCategoryText.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
 
+        AddPrize.setBackground(new java.awt.Color(232, 224, 194));
         AddPrize.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         AddPrize.setText("Add");
         AddPrize.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +122,7 @@ private PrizeController prizeController;
             }
         });
 
+        Delete.setBackground(new java.awt.Color(232, 224, 194));
         Delete.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Delete.setText("Delete");
         Delete.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +131,7 @@ private PrizeController prizeController;
             }
         });
 
+        SearchPrize.setBackground(new java.awt.Color(232, 224, 194));
         SearchPrize.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         SearchPrize.setText("Search");
         SearchPrize.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +140,7 @@ private PrizeController prizeController;
             }
         });
 
+        UpdatePrize.setBackground(new java.awt.Color(232, 224, 194));
         UpdatePrize.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         UpdatePrize.setText("Update");
         UpdatePrize.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +154,7 @@ private PrizeController prizeController;
         ComboBoxStatus.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         ComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AVAILABLE", "DELIVERED" }));
 
+        jButton1.setBackground(new java.awt.Color(232, 224, 194));
         jButton1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +198,7 @@ private PrizeController prizeController;
                                 .addComponent(UpdatePrize)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1)
-                                .addGap(41, 41, 41))))
+                                .addGap(40, 40, 40))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -249,18 +257,14 @@ private PrizeController prizeController;
                             .addComponent(SearchPrizeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AddPrize)
-                            .addComponent(Delete)
-                            .addComponent(UpdatePrize))
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(362, 362, 362))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddPrize)
+                    .addComponent(Delete)
+                    .addComponent(UpdatePrize)
+                    .addComponent(jButton1))
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

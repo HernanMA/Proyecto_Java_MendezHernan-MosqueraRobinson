@@ -56,6 +56,8 @@ private CashRegisterController cashRegisterController;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel1.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel1.setText("Commerce");
 
@@ -74,6 +76,7 @@ private CashRegisterController cashRegisterController;
         jLabel5.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel5.setText("Closing amount");
 
+        UpdateCommerce.setBackground(new java.awt.Color(232, 224, 194));
         UpdateCommerce.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         UpdateCommerce.setText("Update");
         UpdateCommerce.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +85,7 @@ private CashRegisterController cashRegisterController;
             }
         });
 
+        DeleteCommerce.setBackground(new java.awt.Color(232, 224, 194));
         DeleteCommerce.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteCommerce.setText("Delete");
         DeleteCommerce.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +94,7 @@ private CashRegisterController cashRegisterController;
             }
         });
 
+        SearchCommerce.setBackground(new java.awt.Color(232, 224, 194));
         SearchCommerce.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         SearchCommerce.setText("Search");
         SearchCommerce.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +103,7 @@ private CashRegisterController cashRegisterController;
             }
         });
 
+        CreateCommerce.setBackground(new java.awt.Color(232, 224, 194));
         CreateCommerce.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         CreateCommerce.setText("Create");
         CreateCommerce.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +191,9 @@ private CashRegisterController cashRegisterController;
                 .addContainerGap())
         );
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
+        CommerceTable.setBackground(new java.awt.Color(236, 231, 215));
         CommerceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

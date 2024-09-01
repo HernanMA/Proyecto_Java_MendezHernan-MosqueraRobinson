@@ -59,6 +59,9 @@ public class Inventory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
+        ItemsTable.setBackground(new java.awt.Color(236, 231, 215));
         ItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -98,6 +101,8 @@ public class Inventory extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel2.setText("Item Name");
 
@@ -119,6 +124,7 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
+        AddItem.setBackground(new java.awt.Color(232, 224, 194));
         AddItem.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         AddItem.setText("ADD");
         AddItem.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +133,7 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
+        DeleteItem.setBackground(new java.awt.Color(232, 224, 194));
         DeleteItem.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         DeleteItem.setText("Delete");
         DeleteItem.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +142,7 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
+        UpdateItem.setBackground(new java.awt.Color(232, 224, 194));
         UpdateItem.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         UpdateItem.setText("Update");
         UpdateItem.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +151,7 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
 
+        Search.setBackground(new java.awt.Color(232, 224, 194));
         Search.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         Search.setText("Search");
         Search.addActionListener(new java.awt.event.ActionListener() {

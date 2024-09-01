@@ -60,6 +60,9 @@ public class Staff extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(246, 243, 235));
+
+        StaffTable.setBackground(new java.awt.Color(236, 231, 215));
         StaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -101,6 +104,8 @@ public class Staff extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(246, 243, 235));
+
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
         jLabel2.setText("Name");
 
@@ -132,7 +137,7 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        back4.setBackground(new java.awt.Color(234, 230, 230));
+        back4.setBackground(new java.awt.Color(232, 224, 194));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back4.setText("Back");
         back4.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +152,7 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
+        SearchEmployee.setBackground(new java.awt.Color(232, 224, 194));
         SearchEmployee.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         SearchEmployee.setText("Search");
         SearchEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +169,7 @@ public class Staff extends javax.swing.JFrame {
             }
         });
 
-        back5.setBackground(new java.awt.Color(234, 230, 230));
+        back5.setBackground(new java.awt.Color(232, 224, 194));
         back5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back5.setText("Back");
         back5.addActionListener(new java.awt.event.ActionListener() {
