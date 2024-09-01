@@ -177,8 +177,8 @@ public class Welcome extends javax.swing.JFrame {
     }//GEN-LAST:event_enterActionPerformed
 
     private void watchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchActionPerformed
-        Management mana = new Management();
-        mana.setVisible(true);
+        StadisticsAPI sta = new StadisticsAPI();
+        sta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_watchActionPerformed
 
