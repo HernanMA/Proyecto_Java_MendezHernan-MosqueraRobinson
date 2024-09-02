@@ -210,7 +210,7 @@ public class Welcome extends javax.swing.JFrame {
     private void watch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watch1ActionPerformed
         Print pri = new Print();
         pri.setVisible(true);
-        this.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_watch1ActionPerformed
 
     /**

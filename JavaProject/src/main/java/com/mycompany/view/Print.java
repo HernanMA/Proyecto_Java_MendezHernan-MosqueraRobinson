@@ -4,6 +4,32 @@
  */
 package com.mycompany.view;
 
+import com.mycompany.util.Conexion;
+import com.mysql.cj.result.Row;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfPTable;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import javax.swing.text.Document;
+
+
+
 /**
  *
  * @author hernan
@@ -15,6 +41,7 @@ public class Print extends javax.swing.JFrame {
      */
     public Print() {
         initComponents();
+        setLocationRelativeTo(null); 
     }
 
     /**
@@ -27,39 +54,39 @@ public class Print extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        watch = new javax.swing.JButton();
-        watch1 = new javax.swing.JButton();
-        watch2 = new javax.swing.JButton();
+        PDF = new javax.swing.JButton();
+        TXT = new javax.swing.JButton();
+        EXCEL = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(246, 243, 235));
 
-        watch.setBackground(new java.awt.Color(232, 224, 194));
-        watch.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        watch.setText("PDF");
-        watch.addActionListener(new java.awt.event.ActionListener() {
+        PDF.setBackground(new java.awt.Color(232, 224, 194));
+        PDF.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        PDF.setText("PDF");
+        PDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                watchActionPerformed(evt);
+                PDFActionPerformed(evt);
             }
         });
 
-        watch1.setBackground(new java.awt.Color(232, 224, 194));
-        watch1.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        watch1.setText("TXT");
-        watch1.addActionListener(new java.awt.event.ActionListener() {
+        TXT.setBackground(new java.awt.Color(232, 224, 194));
+        TXT.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        TXT.setText("TXT");
+        TXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                watch1ActionPerformed(evt);
+                TXTActionPerformed(evt);
             }
         });
 
-        watch2.setBackground(new java.awt.Color(232, 224, 194));
-        watch2.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
-        watch2.setText("Excel");
-        watch2.addActionListener(new java.awt.event.ActionListener() {
+        EXCEL.setBackground(new java.awt.Color(232, 224, 194));
+        EXCEL.setFont(new java.awt.Font("Bradley Hand", 0, 24)); // NOI18N
+        EXCEL.setText("Excel");
+        EXCEL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                watch2ActionPerformed(evt);
+                EXCELActionPerformed(evt);
             }
         });
 
@@ -72,11 +99,11 @@ public class Print extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(watch)
+                .addComponent(PDF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addComponent(watch2)
+                .addComponent(EXCEL)
                 .addGap(124, 124, 124)
-                .addComponent(watch1)
+                .addComponent(TXT)
                 .addGap(34, 34, 34))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -90,9 +117,9 @@ public class Print extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(watch)
-                    .addComponent(watch1)
-                    .addComponent(watch2))
+                    .addComponent(PDF)
+                    .addComponent(TXT)
+                    .addComponent(EXCEL))
                 .addGap(87, 87, 87))
         );
 
@@ -116,19 +143,121 @@ public class Print extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void watchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchActionPerformed
-        StadisticsAPI sta = new StadisticsAPI();
-        sta.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_watchActionPerformed
+    private void PDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PDFActionPerformed
+        Connection conexion = null;
+    try {
+        // Obtener la ruta del directorio de descargas
+        String userHome = System.getProperty("user.home");
+        String downloadDir = userHome + "/Downloads";
+        String filePath = downloadDir + "/output.pdf"; // Nombre del archivo
 
-    private void watch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watch1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_watch1ActionPerformed
+        com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+        PdfWriter.getInstance(document, new FileOutputStream(filePath));
+        document.open();
 
-    private void watch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watch2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_watch2ActionPerformed
+        document.add(new Paragraph("Shop Statistics"));
+        document.add(new Paragraph(" "));
+
+        PdfPTable table = new PdfPTable(4);
+        table.addCell("Shop ID");
+        table.addCell("Manager ID");
+        table.addCell("Manager Name");
+        table.addCell("Total Sales");
+
+        conexion = Conexion.getInstance().conectar();
+        String query = "SELECT sh.id AS shop_id, sh.manager_id AS manager_id, emp.name AS manager_name, SUM(ord.total_value) AS total_sales " +
+                       "FROM Shops sh " +
+                       "JOIN Orders ord ON sh.id = ord.shop_id " +
+                       "JOIN Employees emp ON sh.manager_id = emp.id " +
+                       "GROUP BY sh.id, sh.manager_id, emp.name;";
+        Statement stmt = conexion.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        while (rs.next()) {
+            table.addCell(String.valueOf(rs.getInt("shop_id")));
+            table.addCell(String.valueOf(rs.getInt("manager_id")));
+            table.addCell(rs.getString("manager_name"));
+            table.addCell(String.valueOf(rs.getDouble("total_sales")));
+        }
+
+        document.add(table);
+        document.close();
+    } catch (com.itextpdf.text.DocumentException | IOException | SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (conexion != null) {
+            Conexion.getInstance().cerrarConexion(conexion);
+        }
+    }
+    }//GEN-LAST:event_PDFActionPerformed
+
+    private void TXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTActionPerformed
+        Connection conexion = null;
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+        conexion = Conexion.getInstance().conectar();
+        String query = "SELECT sh.id AS shop_id, sh.manager_id AS manager_id, emp.name AS manager_name, SUM(ord.total_value) AS total_sales " +
+                       "FROM Shops sh " +
+                       "JOIN Orders ord ON sh.id = ord.shop_id " +
+                       "JOIN Employees emp ON sh.manager_id = emp.id " +
+                       "GROUP BY sh.id, sh.manager_id, emp.name;";
+        Statement stmt = conexion.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        writer.write("Shop ID\tManager ID\tManager Name\tTotal Sales");
+        writer.newLine();
+
+        while (rs.next()) {
+            writer.write(rs.getInt("shop_id") + "\t" + rs.getInt("manager_id") + "\t" + rs.getString("manager_name") + "\t" + rs.getDouble("total_sales"));
+            writer.newLine();
+        }
+    } catch (IOException | SQLException e) {
+        e.printStackTrace();
+    } finally {
+        Conexion.getInstance().cerrarConexion(conexion);
+    }
+    }//GEN-LAST:event_TXTActionPerformed
+
+    private void EXCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXCELActionPerformed
+        Connection conexion = null;
+    try (Workbook workbook = new XSSFWorkbook()) {
+        Sheet sheet = workbook.createSheet("Shop Statistics");
+
+        // Usa el Row de Apache POI, no el de MySQL
+        org.apache.poi.ss.usermodel.Row header = sheet.createRow(0);
+        header.createCell(0).setCellValue("Shop ID");
+        header.createCell(1).setCellValue("Manager ID");
+        header.createCell(2).setCellValue("Manager Name");
+        header.createCell(3).setCellValue("Total Sales");
+
+        conexion = Conexion.getInstance().conectar();
+        String query = "SELECT sh.id AS shop_id, sh.manager_id AS manager_id, emp.name AS manager_name, SUM(ord.total_value) AS total_sales " +
+                       "FROM Shops sh " +
+                       "JOIN Orders ord ON sh.id = ord.shop_id " +
+                       "JOIN Employees emp ON sh.manager_id = emp.id " +
+                       "GROUP BY sh.id, sh.manager_id, emp.name;";
+        Statement stmt = conexion.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        int rowNum = 1;
+        while (rs.next()) {
+            org.apache.poi.ss.usermodel.Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(rs.getInt("shop_id"));
+            row.createCell(1).setCellValue(rs.getInt("manager_id"));
+            row.createCell(2).setCellValue(rs.getString("manager_name"));
+            row.createCell(3).setCellValue(rs.getDouble("total_sales"));
+        }
+
+        try (FileOutputStream fileOut = new FileOutputStream("output.xlsx")) {
+            workbook.write(fileOut);
+        }
+    } catch (IOException | SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (conexion != null) {
+            Conexion.getInstance().cerrarConexion(conexion);
+        }
+    }
+    }//GEN-LAST:event_EXCELActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,10 +296,10 @@ public class Print extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EXCEL;
+    private javax.swing.JButton PDF;
+    private javax.swing.JButton TXT;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton watch;
-    private javax.swing.JButton watch1;
-    private javax.swing.JButton watch2;
     // End of variables declaration//GEN-END:variables
 }
