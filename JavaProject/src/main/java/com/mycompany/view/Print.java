@@ -58,6 +58,7 @@ public class Print extends javax.swing.JFrame {
         TXT = new javax.swing.JButton();
         EXCEL = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        back4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +94,15 @@ public class Print extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bradley Hand", 0, 48)); // NOI18N
         jLabel2.setText("Print here!");
 
+        back4.setBackground(new java.awt.Color(232, 224, 194));
+        back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
+        back4.setText("Back");
+        back4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,15 +110,19 @@ public class Print extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(PDF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGap(119, 119, 119)
                 .addComponent(EXCEL)
-                .addGap(124, 124, 124)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TXT)
                 .addGap(34, 34, 34))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(167, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(164, 164, 164))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(back4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +134,8 @@ public class Print extends javax.swing.JFrame {
                     .addComponent(PDF)
                     .addComponent(TXT)
                     .addComponent(EXCEL))
-                .addGap(87, 87, 87))
+                .addGap(57, 57, 57)
+                .addComponent(back4))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,6 +274,12 @@ public class Print extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_EXCELActionPerformed
 
+    private void back4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back4ActionPerformed
+        Welcome soft = new Welcome();
+        soft.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,6 +320,7 @@ public class Print extends javax.swing.JFrame {
     private javax.swing.JButton EXCEL;
     private javax.swing.JButton PDF;
     private javax.swing.JButton TXT;
+    private javax.swing.JButton back4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
