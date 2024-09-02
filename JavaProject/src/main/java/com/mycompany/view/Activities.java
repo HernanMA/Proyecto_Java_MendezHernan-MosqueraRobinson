@@ -56,6 +56,7 @@ private TriviaModel triviaModel;
         triviaQuestionController.updateTable();
         triviaModel = new TriviaModel();
         triviaController = new TriviaController(triviaModel, this);
+        triviaQuestionController.updateTable();
         
     }
     

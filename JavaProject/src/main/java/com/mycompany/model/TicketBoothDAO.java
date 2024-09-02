@@ -99,4 +99,25 @@ public class TicketBoothDAO {
             return false;
         }
     }
+    
+    public boolean eventHasTicketBooth(int eventId) {
+        String sql = "SELECT COUNT(*) FROM TicketBooths WHERE event_id=?";
+        try (Connection conn = conexion.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, eventId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Devuelve true si ya existe una taquilla para ese evento
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al verificar la taquilla: " + e.getMessage());
+            return false;
+        }
+    }
 }

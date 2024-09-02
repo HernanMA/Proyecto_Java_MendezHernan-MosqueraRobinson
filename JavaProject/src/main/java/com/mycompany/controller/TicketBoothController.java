@@ -33,18 +33,25 @@ public class TicketBoothController {
     }
 
     public boolean createTicketBooth(int eventId, String location, String contactNumber, int managerId) {
-        try {
-            boolean success = ticketBoothDAO.createTicketBooth(eventId, location, contactNumber, managerId);
-            if (success) {
-                System.out.println("Taquilla creada exitosamente.");
-                updateTable(); 
-            }
-            return success;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(ticketsView, e.getMessage()); 
+    try {
+        // Verifica si ya existe una taquilla para este evento
+        if (ticketBoothDAO.eventHasTicketBooth(eventId)) {
+            JOptionPane.showMessageDialog(ticketsView, "Este evento ya tiene una taquilla asignada. No se puede añadir otra.");
             return false;
         }
+
+        boolean success = ticketBoothDAO.createTicketBooth(eventId, location, contactNumber, managerId);
+        if (success) {
+            System.out.println("Taquilla creada exitosamente.");
+            updateTable(); 
+        }
+        return success;
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(ticketsView, e.getMessage()); 
+        return false;
     }
+}
+
 
     public TicketBooth searchTicketBooth(int id) {
         return ticketBoothDAO.getTicketBoothById(id);
