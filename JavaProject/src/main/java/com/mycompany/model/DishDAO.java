@@ -70,6 +70,7 @@ public class DishDAO {
     public void buyDish(int dishId) throws SQLException {
     String getIngredientsQuery = "SELECT ingredient_id, quantity_required FROM DishIngredients WHERE dish_id = ?";
     String updateIngredientsQuery = "UPDATE Ingredients SET available_quantity = available_quantity - ? WHERE id = ?";
+    boolean hasSufficientIngredients = true;
 
     try (Connection con = Conexion.getInstance().conectar();
          PreparedStatement getIngredientsStmt = con.prepareStatement(getIngredientsQuery);
@@ -78,22 +79,34 @@ public class DishDAO {
         getIngredientsStmt.setInt(1, dishId);
 
         try (ResultSet rs = getIngredientsStmt.executeQuery()) {
+            // Primero, verificar si hay suficientes ingredientes
+            List<Integer> ingredientIds = new ArrayList<>();
+            List<Integer> requiredQuantities = new ArrayList<>();
+
             while (rs.next()) {
                 int ingredientId = rs.getInt("ingredient_id");
                 int quantityRequired = rs.getInt("quantity_required");
+                int currentQuantity = getIngredientQuantity(con, ingredientId);
 
-                System.out.println("Restando " + quantityRequired + " unidades del ingrediente con ID " + ingredientId);
-
-                updateIngredientsStmt.setInt(1, quantityRequired);
-                updateIngredientsStmt.setInt(2, ingredientId);
-                
-                int affectedRows = updateIngredientsStmt.executeUpdate();
-                
-                if (affectedRows > 0) {
-                    System.out.println("Se actualizó la cantidad del ingrediente con ID " + ingredientId);
-                } else {
-                    System.err.println("No se pudo actualizar la cantidad del ingrediente con ID " + ingredientId);
+                if (currentQuantity < quantityRequired) {
+                    hasSufficientIngredients = false;
+                    break; // No es necesario seguir verificando
                 }
+
+                // Guardar datos para usarlos luego si hay suficientes ingredientes
+                ingredientIds.add(ingredientId);
+                requiredQuantities.add(quantityRequired);
+            }
+
+            if (hasSufficientIngredients) {
+                for (int i = 0; i < ingredientIds.size(); i++) {
+                    updateIngredientsStmt.setInt(1, requiredQuantities.get(i));
+                    updateIngredientsStmt.setInt(2, ingredientIds.get(i));
+                    updateIngredientsStmt.executeUpdate();
+                }
+                System.out.println("Compra realizada con éxito.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null, "Ingredientes insuficientes, pide otro platillo.");
             }
         }
     } catch (SQLException e) {
@@ -101,4 +114,16 @@ public class DishDAO {
     }
 }
 
+private int getIngredientQuantity(Connection con, int ingredientId) throws SQLException {
+    String query = "SELECT available_quantity FROM Ingredients WHERE id = ?";
+    try (PreparedStatement stmt = con.prepareStatement(query)) {
+        stmt.setInt(1, ingredientId);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("available_quantity");
+            }
+        }
+    }
+    return 0;
+}
 }
