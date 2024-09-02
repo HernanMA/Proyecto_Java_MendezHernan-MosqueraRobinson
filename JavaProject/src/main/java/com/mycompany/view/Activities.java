@@ -505,37 +505,37 @@ private int calculateScore(List<String> questions, List<String> answers) throws 
         jPanel6.setBackground(new java.awt.Color(246, 243, 235));
 
         Question1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question1.setText("jLabel21");
+        Question1.setText("Question 1");
 
         jLabel21.setFont(new java.awt.Font("Bradley Hand", 0, 36)); // NOI18N
         jLabel21.setText("WELCOME TO THE CHALLENGE");
 
         Question2.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question2.setText("jLabel21");
+        Question2.setText("Question 2");
 
         Question3.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question3.setText("jLabel21");
+        Question3.setText("Question 3");
 
         Question4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question4.setText("jLabel21");
+        Question4.setText("Question 4");
 
         Question5.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question5.setText("jLabel21");
+        Question5.setText("Question 6");
 
         Question6.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question6.setText("jLabel21");
+        Question6.setText("Question 5");
 
         Question7.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question7.setText("jLabel21");
+        Question7.setText("Question 7");
 
         Question8.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question8.setText("jLabel21");
+        Question8.setText("Question 8");
 
         Question9.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question9.setText("jLabel21");
+        Question9.setText("Question 9");
 
         Question10.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
-        Question10.setText("jLabel21");
+        Question10.setText("Question 10");
 
         Answer1.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
 
