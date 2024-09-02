@@ -99,6 +99,11 @@ public class Stadistics extends javax.swing.JFrame {
         back4.setBackground(new java.awt.Color(232, 224, 194));
         back4.setFont(new java.awt.Font("Bradley Hand", 0, 18)); // NOI18N
         back4.setText("Back");
+        back4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                back4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,6 +152,12 @@ public class Stadistics extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void back4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back4ActionPerformed
+        Others ot = new Others();
+        ot.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back4ActionPerformed
 
     /**
      * @param args the command line arguments
